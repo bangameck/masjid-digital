@@ -192,8 +192,7 @@
         x-show="mode === 'standby'">
         <div class="w-full h-full flex gap-6 md:gap-8">
 
-            <div
-                class="flex-[2.5] relative rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 bg-black flex flex-col justify-end">
+            <div class="w-[75%] shrink-0 relative rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 bg-black flex flex-col justify-end">
 
                 <div class="absolute inset-0 z-0">
                     @if ($banners->count() > 0)
@@ -386,38 +385,39 @@
                 </div>
             </div>
 
-            <div class="w-full max-w-[360px] md:max-w-[400px] flex flex-col gap-4 h-full">
+            <div class="flex-1 flex flex-col gap-4 h-full min-w-0">
                 <div class="flex-1 flex flex-col gap-2 min-h-0">
-    @php $waktuSholat = ['Imsak', 'Subuh', 'Dzuhur', 'Ashar', 'Maghrib', 'Isya']; @endphp
-    @foreach ($waktuSholat as $waktu)
-        @php
-            $field = strtolower($waktu);
-            $jamFormatted = \Carbon\Carbon::parse($jadwal->$field ?? '00:00:00')->format('H:i');
-            $isSunnah = in_array($waktu, ['Imsak']);
-        @endphp
+                    @php $waktuSholat = ['Imsak', 'Subuh', 'Dzuhur', 'Ashar', 'Maghrib', 'Isya']; @endphp
+                    @foreach ($waktuSholat as $waktu)
+                        @php
+                            $field = strtolower($waktu);
+                            $jamFormatted = \Carbon\Carbon::parse($jadwal->$field ?? '00:00:00')->format('H:i');
+                            $isSunnah = in_array($waktu, ['Imsak']);
+                        @endphp
 
-        <div class="flex-1 relative overflow-hidden rounded-[1.2rem] px-5 flex justify-between items-center border transition-all duration-500"
-            :class="nextPrayerName === '{{ $waktu }}' ?
-                'bg-theme-main border-theme-main scale-105 shadow-theme-glow z-10' :
-                'bg-black/50 backdrop-blur-md {{ $isSunnah ? 'border-amber-500/20 bg-amber-950/20' : 'border-white/10' }}'">
+                        <div class="flex-1 relative overflow-hidden rounded-[1.2rem] px-5 flex justify-between items-center border transition-all duration-500"
+                            :class="nextPrayerName === '{{ $waktu }}' ?
+                                'bg-theme-main border-theme-main scale-105 shadow-theme-glow z-10' :
+                                'bg-black/50 backdrop-blur-md {{ $isSunnah ? 'border-amber-500/20 bg-amber-950/20' : 'border-white/10' }}'">
 
-            <span class="text-lg font-bold uppercase tracking-widest"
-                :class="nextPrayerName === '{{ $waktu }}' ? 'text-white' :
-                    '{{ $isSunnah ? 'text-amber-600' : 'text-slate-400' }}'">{{ $waktu }}</span>
+                            <span class="text-lg font-bold uppercase tracking-widest"
+                                :class="nextPrayerName === '{{ $waktu }}' ? 'text-white' :
+                                    '{{ $isSunnah ? 'text-amber-600' : 'text-slate-400' }}'">{{ $waktu }}</span>
 
-            <span class="text-3xl font-black tracking-tighter tabular-nums"
-                :class="nextPrayerName === '{{ $waktu }}' ? 'text-white' :
-                    '{{ $isSunnah ? 'text-amber-400' : 'text-theme-main' }}'">{{ $jamFormatted }}</span>
+                            <span class="text-3xl font-black tracking-tighter tabular-nums"
+                                :class="nextPrayerName === '{{ $waktu }}' ? 'text-white' :
+                                    '{{ $isSunnah ? 'text-amber-400' : 'text-theme-main' }}'">{{ $jamFormatted }}</span>
 
-            <div x-show="nextPrayerName === '{{ $waktu }}'"
-                class="absolute -bottom-4 -right-4 text-7xl text-white opacity-20 rotate-12">
-                <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/>
-                </svg>
-            </div>
-        </div>
-    @endforeach
-</div>
+                            <div x-show="nextPrayerName === '{{ $waktu }}'"
+                                class="absolute -bottom-4 -right-4 text-7xl text-white opacity-20 rotate-12">
+                                <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" />
+                                </svg>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
 
                 <div
                     class="bg-theme-dark rounded-[1.5rem] p-5 border border-theme-main/50 shadow-[0_0_40px_rgba(0,0,0,0.8)] shrink-0 relative overflow-hidden h-[120px] flex items-center justify-center group ring-1 ring-white/10">

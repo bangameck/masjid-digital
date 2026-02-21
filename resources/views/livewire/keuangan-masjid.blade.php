@@ -81,19 +81,44 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div
-            class="bg-slate-900 p-8 rounded-[2.5rem] relative overflow-hidden shadow-2xl flex flex-col justify-between min-h-45">
+            class="bg-slate-900 p-8 rounded-[2.5rem] relative overflow-hidden shadow-2xl flex flex-col justify-center gap-4 min-h-45">
             <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
+
             <div>
-                <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-1">Total Saldo Kas</p>
+                <p class="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1 flex items-center gap-2">
+                    Total Keseluruhan Kas
+                    <span class="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded text-[8px] tracking-normal">All
+                        Time</span>
+                </p>
                 <h2 class="text-3xl md:text-4xl font-black text-white tracking-tighter">
-                    Rp {{ number_format($saldoAkhir, 0, ',', '.') }}
+                    Rp {{ number_format($saldoAllTime, 0, ',', '.') }}
                 </h2>
             </div>
-            <div class="mt-6 flex items-center gap-2">
-                <div class="bg-white/10 px-3 py-1 rounded-lg backdrop-blur-md border border-white/5">
-                    <span class="text-[10px] text-emerald-400 font-black uppercase">
-                        {{ empty($sub_kategori_filter) ? 'Semua Jenis' : $sub_kategori_filter }}
+
+            <div class="w-full h-px bg-white/10 my-1"></div>
+            <div>
+                <p class="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1 flex items-center gap-2">
+                    Saldo Akhir Periode
+                    <span class="bg-white/10 text-slate-300 px-2 py-0.5 rounded text-[8px] tracking-normal">
+                        @if ($filter_mode == 'rentang')
+                            {{ \Carbon\Carbon::parse($start_date)->translatedFormat('d M') }} -
+                            {{ \Carbon\Carbon::parse($end_date)->translatedFormat('d M Y') }}
+                        @else
+                            Akhir
+                            {{ \Carbon\Carbon::create((int) $tahun_filter, (int) $bulan_filter, 1)->translatedFormat('F Y') }}
+                        @endif
                     </span>
+                </p>
+                <div class="flex items-center gap-3 mt-1">
+                    <h2 class="text-xl md:text-2xl font-black text-slate-200 tracking-tighter leading-none">
+                        Rp {{ number_format($saldoAkhir, 0, ',', '.') }}
+                    </h2>
+
+                    <div class="bg-white/10 px-2.5 py-1 rounded-lg backdrop-blur-md border border-white/5 shrink-0">
+                        <span class="text-[9px] text-emerald-400 font-black uppercase">
+                            {{ empty($sub_kategori_filter) ? 'Semua Jenis' : $sub_kategori_filter }}
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -102,7 +127,8 @@
             class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-between min-h-45">
             <div>
                 <div class="flex justify-between items-start">
-                    <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-1">Pemasukan Bulan Ini</p>
+                    <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-1">Pemasukan (Periode Ini)
+                    </p>
                     <div class="p-2 bg-emerald-50 rounded-xl text-emerald-500"><svg class="w-5 h-5" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -110,18 +136,25 @@
                         </svg></div>
                 </div>
                 <h2 class="text-3xl font-black text-emerald-600 tracking-tighter mt-2">
-                    + Rp {{ number_format($pemasukanBulanIni, 0, ',', '.') }}
+                    + Rp {{ number_format($pemasukanPeriodeIni, 0, ',', '.') }}
                 </h2>
             </div>
-            <p class="text-[10px] text-slate-400 font-bold mt-4">Bulan:
-                {{ \Carbon\Carbon::create()->month((int) $bulan_filter)->translatedFormat('F') }}</p>
+            <p class="text-[10px] text-slate-400 font-bold mt-4">Periode:
+                @if ($filter_mode == 'rentang')
+                    {{ \Carbon\Carbon::parse($start_date)->format('d M y') }} -
+                    {{ \Carbon\Carbon::parse($end_date)->format('d M y') }}
+                @else
+                    {{ \Carbon\Carbon::create()->month((int) $bulan_filter)->translatedFormat('F Y') }}
+                @endif
+            </p>
         </div>
 
         <div
             class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-between min-h-45">
             <div>
                 <div class="flex justify-between items-start">
-                    <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-1">Pengeluaran Bulan Ini</p>
+                    <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-1">Pengeluaran (Periode Ini)
+                    </p>
                     <div class="p-2 bg-rose-50 rounded-xl text-rose-500"><svg class="w-5 h-5" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -129,11 +162,17 @@
                         </svg></div>
                 </div>
                 <h2 class="text-3xl font-black text-rose-500 tracking-tighter mt-2">
-                    - Rp {{ number_format($pengeluaranBulanIni, 0, ',', '.') }}
+                    - Rp {{ number_format($pengeluaranPeriodeIni, 0, ',', '.') }}
                 </h2>
             </div>
-            <p class="text-[10px] text-slate-400 font-bold mt-4">Bulan:
-                {{ \Carbon\Carbon::create()->month((int) $bulan_filter)->translatedFormat('F') }}</p>
+            <p class="text-[10px] text-slate-400 font-bold mt-4">Periode:
+                @if ($filter_mode == 'rentang')
+                    {{ \Carbon\Carbon::parse($start_date)->format('d M y') }} -
+                    {{ \Carbon\Carbon::parse($end_date)->format('d M y') }}
+                @else
+                    {{ \Carbon\Carbon::create()->month((int) $bulan_filter)->translatedFormat('F Y') }}
+                @endif
+            </p>
         </div>
     </div>
 
@@ -154,7 +193,7 @@
                     <div class="h-6 w-px bg-slate-200 mx-1"></div>
 
                     <button wire:click="exportPdf" wire:loading.attr="disabled"
-                        class="bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center gap-2 shadow-lg">
+                        class="bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center gap-2 shadow-lg shrink-0">
                         <svg wire:loading wire:target="exportPdf" class="animate-spin h-3 w-3 text-white"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
@@ -174,24 +213,45 @@
 
                     <div class="h-6 w-px bg-slate-200 mx-1"></div>
 
-                    <select wire:model.live="bulan_filter"
+                    <select wire:model.live="filter_mode"
                         class="bg-slate-50 border-none rounded-xl text-xs font-bold text-slate-700 py-2 focus:ring-0 cursor-pointer">
-                        @foreach (range(1, 12) as $m)
-                            <option value="{{ $m }}">
-                                {{ \Carbon\Carbon::create()->month((int) $m)->translatedFormat('F') }}</option>
-                        @endforeach
+                        <option value="bulan">Per Bulan</option>
+                        <option value="rentang">Rentang Waktu</option>
                     </select>
-                    <select wire:model.live="tahun_filter"
-                        class="bg-slate-50 border-none rounded-xl text-xs font-bold text-slate-700 py-2 focus:ring-0 cursor-pointer">
-                        @foreach (range(date('Y') - 2, date('Y') + 2) as $y)
-                            <option value="{{ $y }}">{{ $y }}</option>
-                        @endforeach
-                    </select>
+
+                    @if($filter_mode == 'rentang')
+                        <div class="flex items-center gap-1 bg-slate-50 rounded-xl px-2 border border-slate-100">
+                            <input type="date" wire:model.live="start_date"
+                                class="bg-transparent border-none text-xs font-bold text-slate-700 py-2 focus:ring-0 w-[110px]">
+
+                            <span class="text-slate-400 text-xs font-bold">-</span>
+
+                            <input type="date" wire:model.live="end_date"
+                                min="{{ $start_date }}"
+                                max="{{ \Carbon\Carbon::parse($start_date)->addDays(31)->format('Y-m-d') }}"
+                                class="bg-transparent border-none text-xs font-bold text-slate-700 py-2 focus:ring-0 w-[110px]">
+                        </div>
+                    @else
+                        <select wire:model.live="bulan_filter"
+                            class="bg-slate-50 border-none rounded-xl text-xs font-bold text-slate-700 py-2 focus:ring-0 cursor-pointer">
+                            @foreach (range(1, 12) as $m)
+                                <option value="{{ $m }}">
+                                    {{ \Carbon\Carbon::create()->month((int) $m)->translatedFormat('F') }}</option>
+                            @endforeach
+                        </select>
+                        <select wire:model.live="tahun_filter"
+                            class="bg-slate-50 border-none rounded-xl text-xs font-bold text-slate-700 py-2 focus:ring-0 cursor-pointer">
+                            @foreach (range(date('Y') - 2, date('Y') + 2) as $y)
+                                <option value="{{ $y }}">{{ $y }}</option>
+                            @endforeach
+                        </select>
+                    @endif
                 </div>
             </div>
 
             <div id="financeChart" wire:ignore></div>
         </div>
+
         @if ($canEdit)
             <div class="bg-emerald-500 p-8 rounded-[2.5rem] shadow-xl shadow-emerald-200 flex flex-col justify-center items-center text-center text-white relative overflow-hidden group cursor-pointer"
                 wire:click="create">
@@ -266,7 +326,6 @@
                 </h4>
                 @if ($canEdit)
                     <form wire:submit.prevent="saveRekening" class="space-y-6">
-
                         <div class="relative z-0 w-full group">
                             <input type="text" wire:model="nama_bank" id="nama_bank"
                                 class="block py-2.5 px-0 w-full text-sm text-slate-900 bg-transparent border-0 border-b-2 border-slate-300 appearance-none focus:outline-none focus:ring-0 focus:border-emerald-500 peer font-bold"
@@ -363,19 +422,21 @@
                         @if ($canEdit)
                             <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button wire:click="editRekening({{ $rek->id }})"
-                                    class="p-2 bg-slate-100 rounded-lg text-slate-500 hover:bg-emerald-500 hover:text-white transition-all"><svg
-                                        class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    class="p-2 bg-slate-100 rounded-lg text-slate-500 hover:bg-emerald-500 hover:text-white transition-all">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
                                         </path>
-                                    </svg></button>
+                                    </svg>
+                                </button>
                                 <button wire:click="deleteRekening({{ $rek->id }})"
-                                    class="p-2 bg-rose-50 rounded-lg text-rose-500 hover:bg-rose-500 hover:text-white transition-all"><svg
-                                        class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    class="p-2 bg-rose-50 rounded-lg text-rose-500 hover:bg-rose-500 hover:text-white transition-all">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
                                         </path>
-                                    </svg></button>
+                                    </svg>
+                                </button>
                             </div>
                         @else
                             <span class="text-[9px] font-black text-slate-300 uppercase tracking-widest">Read
@@ -397,7 +458,7 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-[3rem] border border-slate-100 shadow-xl overflow-hidden min-h-125 relative">
+    <div class="bg-white rounded-[3rem] border border-slate-100 shadow-xl overflow-hidden min-h-125 relative mt-8">
         <div
             class="px-10 py-8 border-b border-slate-50 flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-50/30">
             <h3 class="font-black text-xl text-slate-800 uppercase tracking-tight">Riwayat Transaksi</h3>
@@ -433,13 +494,66 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left">
                 <thead>
-                    <tr
-                        class="text-slate-400 text-[9px] uppercase tracking-[0.2em] font-black border-b border-slate-50">
-                        <th class="px-8 py-6">Tanggal</th>
-                        <th class="px-6 py-6">Keterangan / Sumber</th>
-                        <th class="px-6 py-6">Kategori / Jenis</th>
-                        <th class="px-6 py-6 text-right">Nominal</th>
-                        <th class="px-8 py-6 text-center">Aksi</th>
+                    <tr class="text-slate-400 text-[9px] uppercase tracking-[0.2em] font-black border-b border-slate-50 select-none">
+                        <th class="px-8 py-6 cursor-pointer group hover:text-emerald-500 transition-colors" wire:click="sortBy('tanggal')">
+                            <div class="flex items-center gap-2">
+                                Tanggal
+                                <svg class="w-3 h-3 {{ $sortColumn == 'tanggal' ? 'text-emerald-500' : 'text-slate-200 group-hover:text-emerald-300 transition-colors' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    @if($sortColumn == 'tanggal' && $sortDirection == 'asc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path>
+                                    @elseif($sortColumn == 'tanggal' && $sortDirection == 'desc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                    @else
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
+                                    @endif
+                                </svg>
+                            </div>
+                        </th>
+
+                        <th class="px-6 py-6 cursor-pointer group hover:text-emerald-500 transition-colors" wire:click="sortBy('sumber_atau_tujuan')">
+                            <div class="flex items-center gap-2">
+                                Keterangan / Sumber
+                                <svg class="w-3 h-3 {{ $sortColumn == 'sumber_atau_tujuan' ? 'text-emerald-500' : 'text-slate-200 group-hover:text-emerald-300 transition-colors' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    @if($sortColumn == 'sumber_atau_tujuan' && $sortDirection == 'asc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path>
+                                    @elseif($sortColumn == 'sumber_atau_tujuan' && $sortDirection == 'desc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                    @else
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
+                                    @endif
+                                </svg>
+                            </div>
+                        </th>
+
+                        <th class="px-6 py-6 text-center cursor-pointer group hover:text-emerald-500 transition-colors" wire:click="sortBy('kategori')">
+                            <div class="flex items-center justify-center gap-2">
+                                Jenis
+                                <svg class="w-3 h-3 {{ $sortColumn == 'kategori' ? 'text-emerald-500' : 'text-slate-200 group-hover:text-emerald-300 transition-colors' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    @if($sortColumn == 'kategori' && $sortDirection == 'asc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path>
+                                    @elseif($sortColumn == 'kategori' && $sortDirection == 'desc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                    @else
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
+                                    @endif
+                                </svg>
+                            </div>
+                        </th>
+
+                        <th class="px-8 py-6 text-right cursor-pointer group hover:text-emerald-500 transition-colors" wire:click="sortBy('nominal')">
+                            <div class="flex items-center justify-end gap-2">
+                                Nominal
+                                <svg class="w-3 h-3 {{ $sortColumn == 'nominal' ? 'text-emerald-500' : 'text-slate-200 group-hover:text-emerald-300 transition-colors' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    @if($sortColumn == 'nominal' && $sortDirection == 'asc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path>
+                                    @elseif($sortColumn == 'nominal' && $sortDirection == 'desc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                    @else
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
+                                    @endif
+                                </svg>
+                            </div>
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-50">
@@ -461,8 +575,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
                                             </path>
-                                        </svg>
-                                        Lihat Bukti
+                                        </svg> Lihat Bukti
                                     </button>
                                 @endif
                             </td>
@@ -477,8 +590,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z">
                                         </path>
-                                    </svg>
-                                    {{ $item->sub_kategori }}
+                                    </svg> {{ $item->sub_kategori }}
                                 </div>
                             </td>
                             <td
@@ -490,21 +602,23 @@
                                 @if ($canEdit)
                                     <div class="flex justify-center gap-2">
                                         <button wire:click="edit({{ $item->id }})"
-                                            class="p-2 bg-slate-100 rounded-lg text-slate-500 hover:bg-emerald-500 hover:text-white transition-all"><svg
-                                                class="w-4 h-4" fill="none" stroke="currentColor"
+                                            class="p-2 bg-slate-100 rounded-lg text-slate-500 hover:bg-emerald-500 hover:text-white transition-all">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
                                                 </path>
-                                            </svg></button>
+                                            </svg>
+                                        </button>
                                         <button wire:click="deleteId({{ $item->id }})"
-                                            class="p-2 bg-rose-50 rounded-lg text-rose-500 hover:bg-rose-500 hover:text-white transition-all"><svg
-                                                class="w-4 h-4" fill="none" stroke="currentColor"
+                                            class="p-2 bg-rose-50 rounded-lg text-rose-500 hover:bg-rose-500 hover:text-white transition-all">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
                                                 </path>
-                                            </svg></button>
+                                            </svg>
+                                        </button>
                                     </div>
                                 @else
                                     <span class="text-[9px] font-black text-slate-300 uppercase tracking-widest">Read
@@ -516,7 +630,7 @@
                         <tr>
                             <td colspan="5"
                                 class="px-8 py-10 text-center font-black text-slate-300 uppercase tracking-widest text-xs">
-                                Belum ada transaksi bulan ini</td>
+                                Belum ada transaksi di periode ini</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -528,7 +642,7 @@
     @if ($isModalOpen)
         <div
             class="fixed inset-0 z-9999 flex items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 overflow-y-auto">
-            <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-lg shadow-2xl relative">
+            <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-lg shadow-2xl relative mt-10 md:mt-0">
                 <h3 class="text-xl font-black text-slate-800 uppercase tracking-tight mb-6">
                     {{ $isEditMode ? 'Edit' : 'Catat' }} Transaksi
                 </h3>
@@ -792,7 +906,7 @@
 
     @if ($showImageModal)
         <div
-            class="fixed inset-0 z-10000 flex items-center justify-center bg-slate-950/95 backdrop-blur-md p-6 animate-fade-in">
+            class="fixed inset-0 z-[10000] flex items-center justify-center bg-slate-950/95 backdrop-blur-md p-6 animate-fade-in">
             <div class="relative max-w-5xl w-full h-full flex flex-col items-center justify-center">
                 <button wire:click="closeImageModal"
                     class="absolute top-0 right-0 z-50 bg-white/10 p-3 rounded-full text-white hover:bg-rose-500 hover:text-white transition-all shadow-xl backdrop-blur-md border border-white/20">
@@ -882,12 +996,14 @@
                             categories: data.labels
                         },
                         series: [{
-                            name: 'Pemasukan',
-                            data: data.income
-                        }, {
-                            name: 'Pengeluaran',
-                            data: data.expense
-                        }]
+                                name: 'Pemasukan',
+                                data: data.income
+                            },
+                            {
+                                name: 'Pengeluaran',
+                                data: data.expense
+                            }
+                        ]
                     });
                 }
             });

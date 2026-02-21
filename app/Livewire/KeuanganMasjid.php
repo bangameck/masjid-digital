@@ -15,7 +15,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\Keuangan;
-use App\Models\Rekening; // <-- MODEL REKENING DITAMBAHKAN
+use App\Models\Rekening;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
@@ -30,8 +30,11 @@ class KeuanganMasjid extends Component
     use WithPagination, WithFileUploads;
 
     // --- FILTER & SEARCH ---
+    public $filter_mode = 'bulan'; // 'bulan' atau 'rentang'
     public $bulan_filter;
     public $tahun_filter;
+    public $start_date;
+    public $end_date;
     public $search = '';
 
     // Filter Sub Kategori
@@ -64,6 +67,9 @@ class KeuanganMasjid extends Component
     public $bukti_path;
     public $originalSize = 0;
     public $compressedSize = 0;
+
+    public $sortColumn = 'tanggal';
+    public $sortDirection = 'desc';
     public $canEdit = false;
 
     public function mount()
@@ -71,7 +77,47 @@ class KeuanganMasjid extends Component
         $this->canEdit = in_array(auth()->user()->role, ['superadmin', 'operator', 'bendahara']);
         $this->bulan_filter = (int)date('m');
         $this->tahun_filter = (int)date('Y');
+        $this->start_date = now()->subDays(30)->format('Y-m-d');
+        $this->end_date = now()->format('Y-m-d');
         $this->tanggal = date('Y-m-d');
+    }
+
+    public function updatedStartDate()
+    {
+        $this->validateDateRange();
+    }
+
+    public function updatedEndDate()
+    {
+        $this->validateDateRange();
+    }
+
+    public function sortBy($columnName)
+    {
+        if ($this->sortColumn === $columnName) {
+            // Jika kolom yang sama diklik, balik arah urutannya (ASC/DESC)
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            // Jika kolom beda diklik, default urutkan dari atas (ASC)
+            $this->sortDirection = 'asc';
+            $this->sortColumn = $columnName;
+        }
+    }
+
+    private function validateDateRange()
+    {
+        $start = Carbon::parse($this->start_date);
+        $end = Carbon::parse($this->end_date);
+
+        if ($end->isBefore($start)) {
+            $this->end_date = $start->format('Y-m-d');
+            $end = $start->copy();
+        }
+
+        if ($start->diffInDays($end) > 31) {
+            // Jika lebih dari 31 hari, sesuaikan start date nya otomatis
+            $this->start_date = $end->copy()->subDays(31)->format('Y-m-d');
+        }
     }
 
     public function render()
@@ -87,35 +133,47 @@ class KeuanganMasjid extends Component
             ->orderBy('sub_kategori', 'asc')
             ->pluck('sub_kategori');
 
-        // 1. Query Data Tabel Keuangan
-        $query = Keuangan::query()
-            ->whereMonth('tanggal', $bulan)
-            ->whereYear('tanggal', $tahun)
-            ->where(function($q) {
-                $q->where('sumber_atau_tujuan', 'like', '%'.$this->search.'%')
-                  ->orWhere('keterangan', 'like', '%'.$this->search.'%');
-            });
+        // 1. Query Data Tabel Keuangan & Statistik
+        $query = Keuangan::query()->where(function($q) {
+            $q->where('sumber_atau_tujuan', 'like', '%'.$this->search.'%')
+              ->orWhere('keterangan', 'like', '%'.$this->search.'%');
+        });
+
+        $statsQuery = Keuangan::query();
+
+        if ($this->filter_mode == 'rentang') {
+            $query->whereBetween('tanggal', [$this->start_date, $this->end_date]);
+            $statsQuery->whereBetween('tanggal', [$this->start_date, $this->end_date]);
+            $endDate = Carbon::parse($this->end_date)->endOfDay();
+        } else {
+            $query->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun);
+            $statsQuery->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun);
+            $endDate = Carbon::createFromDate($tahun, $bulan, 1)->endOfMonth();
+        }
 
         if (!empty($this->sub_kategori_table_filter)) {
             $query->where('sub_kategori', $this->sub_kategori_table_filter);
         }
 
-        $transaksi = $query->latest('tanggal')->paginate(10);
+        $transaksi = $query->orderBy($this->sortColumn, $this->sortDirection)->paginate(10);
 
-        // 2. Query Ringkasan Statistik
-        $statsQuery = Keuangan::query();
+        // Ringkasan Statistik
+        $statsSaldoQuery = Keuangan::query();
         if (!empty($this->sub_kategori_filter)) {
             $statsQuery->where('sub_kategori', $this->sub_kategori_filter);
+            $statsSaldoQuery->where('sub_kategori', $this->sub_kategori_filter);
         }
 
-        $endDate = Carbon::createFromDate($tahun, $bulan, 1)->endOfMonth();
+        $totalPemasukanAll = (clone $statsSaldoQuery)->where('kategori', 'pemasukan')->whereDate('tanggal', '<=', $endDate)->sum('nominal');
+        $totalPengeluaranAll = (clone $statsSaldoQuery)->where('kategori', 'pengeluaran')->whereDate('tanggal', '<=', $endDate)->sum('nominal');
+        $saldoAkhir = $totalPemasukanAll - $totalPengeluaranAll;
 
-        $totalPemasukan = (clone $statsQuery)->where('kategori', 'pemasukan')->whereDate('tanggal', '<=', $endDate)->sum('nominal');
-        $totalPengeluaran = (clone $statsQuery)->where('kategori', 'pengeluaran')->whereDate('tanggal', '<=', $endDate)->sum('nominal');
-        $saldoAkhir = $totalPemasukan - $totalPengeluaran;
+        $pemasukanAllTime = Keuangan::where('kategori', 'pemasukan')->sum('nominal');
+        $pengeluaranAllTime = Keuangan::where('kategori', 'pengeluaran')->sum('nominal');
+        $saldoAllTime = $pemasukanAllTime - $pengeluaranAllTime;
 
-        $pemasukanBulanIni = (clone $statsQuery)->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->where('kategori', 'pemasukan')->sum('nominal');
-        $pengeluaranBulanIni = (clone $statsQuery)->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->where('kategori', 'pengeluaran')->sum('nominal');
+        $pemasukanPeriodeIni = (clone $statsQuery)->where('kategori', 'pemasukan')->sum('nominal');
+        $pengeluaranPeriodeIni = (clone $statsQuery)->where('kategori', 'pengeluaran')->sum('nominal');
 
         // 3. Siapkan Data Grafik
         $chartData = $this->prepareChartData($tahun, $bulan, $this->sub_kategori_filter);
@@ -127,16 +185,29 @@ class KeuanganMasjid extends Component
         return view('livewire.keuangan-masjid', [
             'transaksi' => $transaksi,
             'saldoAkhir' => $saldoAkhir,
-            'pemasukanBulanIni' => $pemasukanBulanIni,
-            'pengeluaranBulanIni' => $pengeluaranBulanIni,
+            'saldoAllTime' => $saldoAllTime,
+            'pemasukanPeriodeIni' => $pemasukanPeriodeIni,
+            'pengeluaranPeriodeIni' => $pengeluaranPeriodeIni,
             'availableSubKategoris' => $availableSubKategoris
         ]);
     }
 
     public function prepareChartData($tahun, $bulan, $subKategoriFilter = null)
     {
-        $incomeQ = Keuangan::whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->where('kategori', 'pemasukan');
-        $expenseQ = Keuangan::whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->where('kategori', 'pengeluaran');
+        $incomeQ = Keuangan::where('kategori', 'pemasukan');
+        $expenseQ = Keuangan::where('kategori', 'pengeluaran');
+
+        if ($this->filter_mode == 'rentang') {
+            $periodStart = Carbon::parse($this->start_date);
+            $periodEnd = Carbon::parse($this->end_date);
+            $incomeQ->whereBetween('tanggal', [$this->start_date, $this->end_date]);
+            $expenseQ->whereBetween('tanggal', [$this->start_date, $this->end_date]);
+        } else {
+            $periodStart = Carbon::createFromDate($tahun, $bulan, 1);
+            $periodEnd = $periodStart->copy()->endOfMonth();
+            $incomeQ->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun);
+            $expenseQ->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun);
+        }
 
         if (!empty($subKategoriFilter)) {
             $incomeQ->where('sub_kategori', $subKategoriFilter);
@@ -146,14 +217,13 @@ class KeuanganMasjid extends Component
         $incomeDaily = $incomeQ->groupBy('tanggal')->selectRaw('DATE(tanggal) as date, sum(nominal) as total')->pluck('total', 'date')->toArray();
         $expenseDaily = $expenseQ->groupBy('tanggal')->selectRaw('DATE(tanggal) as date, sum(nominal) as total')->pluck('total', 'date')->toArray();
 
-        $daysInMonth = Carbon::createFromDate($tahun, $bulan, 1)->daysInMonth;
         $labels = [];
         $incomeData = [];
         $expenseData = [];
 
-        for ($d = 1; $d <= $daysInMonth; $d++) {
-            $dateKey = Carbon::createFromDate($tahun, $bulan, $d)->format('Y-m-d');
-            $labels[] = $d;
+        for ($date = $periodStart->copy(); $date->lte($periodEnd); $date->addDay()) {
+            $dateKey = $date->format('Y-m-d');
+            $labels[] = ($this->filter_mode == 'rentang') ? $date->format('d M') : $date->format('d');
             $incomeData[] = $incomeDaily[$dateKey] ?? 0;
             $expenseData[] = $expenseDaily[$dateKey] ?? 0;
         }
@@ -165,9 +235,7 @@ class KeuanganMasjid extends Component
         ];
     }
 
-    // ==========================================
-    // CRUD REKENING LOGIC
-    // ==========================================
+    // ... [BAGIAN CRUD REKENING & TRANSAKSI SAMA PERSIS DENGAN SEBELUMNYA] ...
 
     public function saveRekening()
     {
@@ -215,10 +283,6 @@ class KeuanganMasjid extends Component
         if (!$this->canEdit) return;
         $this->reset(['rek_id', 'nama_bank', 'nama_akun', 'nomor_rekening', 'isEditRekening']);
     }
-
-    // ==========================================
-    // CRUD KEUANGAN LOGIC
-    // ==========================================
 
     public function showImage($url)
     {
@@ -375,15 +439,18 @@ class KeuanganMasjid extends Component
 
     public function exportPdf()
     {
-        $bulan = (int) $this->bulan_filter;
-        $tahun = (int) $this->tahun_filter;
-
-        $query = Keuangan::with('user')
-            ->whereMonth('tanggal', $bulan)
-            ->whereYear('tanggal', $tahun)
-            ->orderBy('tanggal', 'asc');
-
+        $query = Keuangan::with('user')->orderBy('tanggal', 'asc');
         $statsQuery = Keuangan::query();
+
+        if ($this->filter_mode == 'rentang') {
+            $query->whereBetween('tanggal', [$this->start_date, $this->end_date]);
+            $endDate = Carbon::parse($this->end_date)->endOfDay();
+        } else {
+            $bulan = (int) $this->bulan_filter;
+            $tahun = (int) $this->tahun_filter;
+            $query->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun);
+            $endDate = Carbon::createFromDate($tahun, $bulan, 1)->endOfMonth();
+        }
 
         if (!empty($this->sub_kategori_filter)) {
             $query->where('sub_kategori', $this->sub_kategori_filter);
@@ -395,23 +462,27 @@ class KeuanganMasjid extends Component
         $pemasukan = $data->where('kategori', 'pemasukan')->sum('nominal');
         $pengeluaran = $data->where('kategori', 'pengeluaran')->sum('nominal');
 
-        $endDate = Carbon::createFromDate($tahun, $bulan, 1)->endOfMonth();
         $totalMasukAll = (clone $statsQuery)->where('kategori', 'pemasukan')->whereDate('tanggal', '<=', $endDate)->sum('nominal');
         $totalKeluarAll = (clone $statsQuery)->where('kategori', 'pengeluaran')->whereDate('tanggal', '<=', $endDate)->sum('nominal');
         $saldo = $totalMasukAll - $totalKeluarAll;
 
         $pdf = Pdf::loadView('pdf.keuangan', [
             'data' => $data,
-            'bulan' => $bulan,
-            'tahun' => $tahun,
+            'filter_mode' => $this->filter_mode,
+            'bulan' => $this->bulan_filter,
+            'tahun' => $this->tahun_filter,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
             'pemasukan' => $pemasukan,
             'pengeluaran' => $pengeluaran,
             'saldo' => $saldo,
             'sub_kategori_filter' => $this->sub_kategori_filter
         ]);
 
+        $fileName = 'Laporan-Keuangan-' . ($this->filter_mode == 'rentang' ? $this->start_date.'-sampai-'.$this->end_date : $this->bulan_filter.'-'.$this->tahun_filter) . '.pdf';
+
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
-        }, 'Laporan-Keuangan-' . $bulan . '-' . $tahun . '.pdf');
+        }, $fileName);
     }
 }

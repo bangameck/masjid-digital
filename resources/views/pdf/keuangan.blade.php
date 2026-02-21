@@ -10,10 +10,11 @@
 
         /* Summary Box */
         .summary-table { width: 100%; margin-bottom: 30px; border-collapse: collapse; }
-        .summary-box { padding: 15px; border-radius: 10px; color: #fff; width: 32%; text-align: center; }
+        .summary-box { padding: 15px; border-radius: 10px; color: #fff; width: 48%; text-align: center; }
         .bg-emerald { background-color: #10b981; }
         .bg-rose { background-color: #f43f5e; }
         .bg-slate { background-color: #0f172a; }
+        .bg-slate-light { background-color: #1e293b; } /* Warna beda dikit buat All Time */
         .summary-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; opacity: 0.8; }
         .summary-val { font-size: 18px; font-weight: bold; }
 
@@ -43,19 +44,35 @@
 <body>
     @php
         $setting = \App\Models\AppSetting::first();
-        $bulanNama = \Carbon\Carbon::create()->month($bulan)->translatedFormat('F');
+
+        // Logika Dinamis Text Periode
+        if (isset($filter_mode) && $filter_mode == 'rentang') {
+            $periodeText = \Carbon\Carbon::parse($start_date)->translatedFormat('d F Y') . ' s/d ' . \Carbon\Carbon::parse($end_date)->translatedFormat('d F Y');
+        } else {
+            $bulanNama = \Carbon\Carbon::create()->month($bulan ?? date('m'))->translatedFormat('F');
+            $periodeText = strtoupper($bulanNama) . ' ' . ($tahun ?? date('Y'));
+        }
+
+        // Hitung Total All Time langsung di view untuk hemat bandwidth ngedit controller
+        $allTimeQuery = \App\Models\Keuangan::query();
+        if (!empty($sub_kategori_filter)) {
+            $allTimeQuery->where('sub_kategori', $sub_kategori_filter);
+        }
+        $pemasukanAllTime = (clone $allTimeQuery)->where('kategori', 'pemasukan')->sum('nominal');
+        $pengeluaranAllTime = (clone $allTimeQuery)->where('kategori', 'pengeluaran')->sum('nominal');
+        $saldoAllTime = $pemasukanAllTime - $pengeluaranAllTime;
 
         // Tarik data Pengurus untuk tanda tangan
-        // Sesuaikan Model Pengurus dan kolomnya jika nama/jabatan berbeda di database Anda
         $ketua = \App\Models\Pengurus::where('jabatan', 'Ketua')->first();
         $bendahara = \App\Models\Pengurus::where('jabatan', 'Bendahara')->first();
+        $kota = $setting->kota_nama ?? 'Pekanbaru'; // Default ke Pekanbaru
     @endphp
 
     <div class="header">
         <h1>{{ $setting->nama_masjid ?? 'MASJID DIGITAL' }}</h1>
         <p>{{ $setting->alamat ?? 'Alamat Masjid Belum Diisi' }}</p>
         <p style="margin-top: 15px; font-weight: bold; color: #0f172a; font-size: 14px;">
-            LAPORAN KEUANGAN PERIODE: {{ strtoupper($bulanNama) }} {{ $tahun }}
+            LAPORAN KEUANGAN PERIODE: {{ strtoupper($periodeText) }}
         </p>
         <p style="margin: 3px 0; font-weight: bold; color: #10b981;">
             Kategori: {{ empty($sub_kategori_filter) ? 'Semua Jenis Transaksi' : strtoupper($sub_kategori_filter) }}
@@ -65,18 +82,25 @@
     <table class="summary-table">
         <tr>
             <td class="summary-box bg-emerald">
-                <div class="summary-label">Pemasukan</div>
+                <div class="summary-label">Pemasukan (Periode Ini)</div>
                 <div class="summary-val">+ Rp {{ number_format($pemasukan, 0, ',', '.') }}</div>
             </td>
-            <td style="width: 2%"></td>
+            <td style="width: 4%"></td>
             <td class="summary-box bg-rose">
-                <div class="summary-label">Pengeluaran</div>
+                <div class="summary-label">Pengeluaran (Periode Ini)</div>
                 <div class="summary-val">- Rp {{ number_format($pengeluaran, 0, ',', '.') }}</div>
             </td>
-            <td style="width: 2%"></td>
+        </tr>
+        <tr><td colspan="3" style="height: 10px;"></td></tr>
+        <tr>
             <td class="summary-box bg-slate">
-                <div class="summary-label">Saldo Akhir</div>
+                <div class="summary-label">Saldo Akhir (Periode)</div>
                 <div class="summary-val">Rp {{ number_format($saldo, 0, ',', '.') }}</div>
+            </td>
+            <td style="width: 4%"></td>
+            <td class="summary-box bg-slate-light">
+                <div class="summary-label">Total Keseluruhan (All Time)</div>
+                <div class="summary-val">Rp {{ number_format($saldoAllTime, 0, ',', '.') }}</div>
             </td>
         </tr>
     </table>
@@ -129,20 +153,18 @@
     </table>
 
     <div class="footer">
-        <p style="text-align: right; color: #64748b;">Pekanbaru, {{ now()->translatedFormat('d F Y') }}</p>
+        <p style="text-align: right; color: #64748b;">{{ ucfirst($kota) }}, {{ now()->translatedFormat('d F Y') }}</p>
 
         <table class="ttd-table">
             <tr>
                 <td>
                     <p>Mengetahui,<br><strong>Ketua Pengurus</strong></p>
-
                     <div class="ttd-name">
                         {{ $ketua ? $ketua->nama : '_______________________' }}
                     </div>
                 </td>
                 <td>
                     <p>Dibuat oleh,<br><strong>Bendahara</strong></p>
-
                     <div class="ttd-name">
                         {{ $bendahara ? $bendahara->nama : '_______________________' }}
                     </div>
