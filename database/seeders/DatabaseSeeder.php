@@ -195,5 +195,9 @@ class DatabaseSeeder extends Seeder
             'is_active' => 1,
             'created_at' => now(),
         ]);
+
+        $this->call([
+            ThemeColorSeeder::class,
+        ]);
     }
 }
