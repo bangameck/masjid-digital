@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Aplikasi Masjid Digital
+ * * @author RadevankaProject (@bangameck)
+ * @link https://github.com/bangameck/masjid-digital
+ * @license MIT
+ * * Dibuat dengan niat amal jariyah untuk digitalisasi masjid.
+ * Tolong jangan hapus hak cipta ini.
+ */
+
 namespace App\Livewire;
 
 use App\Models\AppSetting;

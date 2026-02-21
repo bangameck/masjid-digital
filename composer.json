@@ -1,9 +1,16 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "radevankaproject/masjid-digital",
+    "description": "Smart Live TV Display Management untuk Masjid.",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "authors": [
+        {
+            "name": "RadevankaProject (@bangameck)",
+            "email": "email.kamu@domain.com",
+            "role": "Lead Developer"
+        }
+    ],
+    "keywords": ["laravel", "framework", "Masjid", "Sholat"],
     "license": "MIT",
     "require": {
         "php": "^8.2",

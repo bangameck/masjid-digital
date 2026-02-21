@@ -23,7 +23,7 @@
         <div class="pt-4 pb-2">
             <p class="px-3 text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Live Display TV</p>
         </div>
-        <x-nav-link href="{{ route('banner') }}" :active="request()->routeIs('banner')" icon="banner">Banner Promo</x-nav-link>
+        <x-nav-link href="{{ route('banner') }}" :active="request()->routeIs('banner')" icon="banner">Banner TV Dislpay</x-nav-link>
         <x-nav-link href="{{ route('jadwal.sholat') }}" :active="request()->routeIs('jadwal.sholat')" icon="calendar">Waktu Sholat</x-nav-link>
         <x-nav-link href="{{ route('schedule') }}" :active="request()->routeIs('schedule')" icon="task">Jadwal Ceramah</x-nav-link>
         <x-nav-link href="{{ route('doa.hadist') }}" :active="request()->routeIs('doa.hadist')" icon="content">Doa & Hadist</x-nav-link>
