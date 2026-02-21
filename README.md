@@ -9,8 +9,6 @@
 
 Aplikasi ini memudahkan pengurus masjid (Takmir, Humas, Operator) untuk mengatur jadwal sholat, pengumuman, petugas dakwah, hingga _running text_ secara _real-time_ tanpa perlu me-_refresh_ layar TV.
 
-> 💡 **Catatan Penting:** Untuk pengalaman pengguna yang maksimal dan kelancaran fungsi antarmuka, **sangat disarankan untuk mengelola aplikasi ini menggunakan perangkat Desktop (PC/Laptop)**.
-
 ---
 
 ## ✨ Fitur Unggulan
@@ -148,6 +146,7 @@ Sistem tab rapi untuk mengelola berbagai agenda dakwah:
    username : guest@masjid.com
    password : masjid123
 ```
+> 💡 **Catatan Penting:** Untuk pengalaman pengguna yang maksimal dan kelancaran fungsi antarmuka, **sangat disarankan untuk mengelola aplikasi ini menggunakan perangkat Desktop (PC/Laptop)**.
 
 ---
 
