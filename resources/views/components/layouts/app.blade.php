@@ -74,7 +74,7 @@
 
         <div class="flex h-screen overflow-hidden" x-data="{ sidebarOpen: false, confirmLogout: false }">
 
-            <aside class="hidden lg:flex lg:flex-shrink-0">
+            <aside class="hidden lg:flex lg:shrink-0">
                 <div class="flex flex-col w-72 shadow-2xl overflow-hidden bg-slate-950">
                     @include('layouts.sidebar-content')
                 </div>
@@ -98,7 +98,7 @@
 
             <div class="flex flex-col flex-1 min-w-0 overflow-hidden relative">
                 <header
-                    class="relative z-10 flex-shrink-0 h-20 flex items-center justify-between px-8 bg-white/50 backdrop-blur-md border-b border-slate-100">
+                    class="relative z-10 shrink-0 h-20 flex items-center justify-between px-8 bg-white/50 backdrop-blur-md border-b border-slate-100">
                     <div class="flex items-center">
                         <button @click="sidebarOpen = true"
                             class="lg:hidden p-2 text-slate-600 rounded-xl hover:bg-white transition-all">
@@ -173,7 +173,7 @@
                 </main>
             </div>
 
-            <div x-show="confirmLogout" class="fixed inset-0 z-[99999] flex items-center justify-center p-4"
+            <div x-show="confirmLogout" class="fixed inset-0 z-99999 flex items-center justify-center p-4"
                 style="display: none;">
 
                 <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-md" x-show="confirmLogout"

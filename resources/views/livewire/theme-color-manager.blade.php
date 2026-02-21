@@ -44,19 +44,19 @@
         {{-- FORM INPUT (Hanya tampil jika canEdit true) --}}
         @if($canEdit)
         <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl h-fit relative overflow-hidden lg:col-span-1">
-            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-500 to-emerald-300"></div>
+            <div class="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-emerald-500 to-emerald-300"></div>
             <h3 class="font-black text-xl text-slate-800 uppercase tracking-tight mb-8">{{ $is_edit ? 'Edit' : 'Tambah' }} Warna</h3>
 
             <form wire:submit.prevent="{{ $is_edit ? 'update' : 'store' }}" class="space-y-6">
                 <div class="relative">
                     <input type="text" wire:model="name" id="name" class="floating-input peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" placeholder=" " />
-                    <label for="name" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">ID Nama (Tanpa Spasi)</label>
+                    <label for="name" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">ID Nama (Tanpa Spasi)</label>
                     @error('name') <span class="text-[10px] text-rose-500 font-bold mt-1 ml-2">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="relative">
                     <input type="text" wire:model="label" id="label" class="floating-input peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" placeholder=" " />
-                    <label for="label" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Label Tampilan</label>
+                    <label for="label" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Label Tampilan</label>
                     @error('label') <span class="text-[10px] text-rose-500 font-bold mt-1 ml-2">{{ $message }}</span> @enderror
                 </div>
 
@@ -96,7 +96,7 @@
                 @forelse($colors as $color)
                 <div class="group bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-between">
                     <div class="flex items-center gap-5">
-                        <div class="w-16 h-16 rounded-[1.5rem] shadow-md flex flex-col overflow-hidden border-2 border-slate-50 shrink-0 transform group-hover:scale-110 transition-transform">
+                        <div class="w-16 h-16 rounded-3xl shadow-md flex flex-col overflow-hidden border-2 border-slate-50 shrink-0 transform group-hover:scale-110 transition-transform">
                             <div class="flex-1" style="background-color: {{ $color->main_color }}" title="Utama: {{ $color->main_color }}"></div>
                             <div class="h-1/3 flex">
                                 <div class="flex-1" style="background-color: {{ $color->dark_color }}" title="Gelap: {{ $color->dark_color }}"></div>
@@ -129,7 +129,7 @@
 
     {{-- MODAL HAPUS --}}
     @if($isDeleteModalOpen && $canEdit)
-    <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-rose-900/90 backdrop-blur-sm p-4 animate-fade-in">
+    <div class="fixed inset-0 z-9999 flex items-center justify-center bg-rose-900/90 backdrop-blur-sm p-4 animate-fade-in">
         <div class="bg-white rounded-[3rem] p-10 w-full max-w-md text-center shadow-2xl relative overflow-hidden">
             <div class="w-24 h-24 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-6 text-rose-500 shadow-inner">
                  <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>

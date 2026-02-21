@@ -81,7 +81,7 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div
-            class="bg-slate-900 p-8 rounded-[2.5rem] relative overflow-hidden shadow-2xl flex flex-col justify-between min-h-[180px]">
+            class="bg-slate-900 p-8 rounded-[2.5rem] relative overflow-hidden shadow-2xl flex flex-col justify-between min-h-45">
             <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
             <div>
                 <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-1">Total Saldo Kas</p>
@@ -99,7 +99,7 @@
         </div>
 
         <div
-            class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-between min-h-[180px]">
+            class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-between min-h-45">
             <div>
                 <div class="flex justify-between items-start">
                     <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-1">Pemasukan Bulan Ini</p>
@@ -118,7 +118,7 @@
         </div>
 
         <div
-            class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-between min-h-[180px]">
+            class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-between min-h-45">
             <div>
                 <div class="flex justify-between items-start">
                     <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-1">Pengeluaran Bulan Ini</p>
@@ -144,14 +144,14 @@
 
                 <div class="flex flex-wrap items-center gap-2">
                     <select wire:model.live="sub_kategori_filter"
-                        class="bg-emerald-50 text-emerald-700 border-none rounded-xl text-xs font-bold py-2 focus:ring-0 cursor-pointer max-w-[140px] truncate">
+                        class="bg-emerald-50 text-emerald-700 border-none rounded-xl text-xs font-bold py-2 focus:ring-0 cursor-pointer max-w-35 truncate">
                         <option value="">Semua Jenis</option>
                         @foreach ($availableSubKategoris as $sub)
                             <option value="{{ $sub }}">{{ $sub }}</option>
                         @endforeach
                     </select>
 
-                    <div class="h-6 w-[1px] bg-slate-200 mx-1"></div>
+                    <div class="h-6 w-px bg-slate-200 mx-1"></div>
 
                     <button wire:click="exportPdf" wire:loading.attr="disabled"
                         class="bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center gap-2 shadow-lg">
@@ -172,7 +172,7 @@
                         PDF
                     </button>
 
-                    <div class="h-6 w-[1px] bg-slate-200 mx-1"></div>
+                    <div class="h-6 w-px bg-slate-200 mx-1"></div>
 
                     <select wire:model.live="bulan_filter"
                         class="bg-slate-50 border-none rounded-xl text-xs font-bold text-slate-700 py-2 focus:ring-0 cursor-pointer">
@@ -218,7 +218,7 @@
             </div>
         @else
             <div
-                class="bg-emerald-500 p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-center items-center min-h-[180px]">
+                class="bg-emerald-500 p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-center items-center min-h-45">
                 <div
                     class="flex items-center gap-3 bg-amber-50 border border-amber-100 px-5 py-3 rounded-2xl shadow-sm animate-fade-in">
                     <div class="p-2 bg-amber-500 rounded-lg text-white shadow-sm shrink-0">
@@ -260,7 +260,7 @@
         @endif
 
         <div class="p-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="md:col-span-1 bg-slate-50 p-6 rounded-[2rem] border border-slate-100">
+            <div class="md:col-span-1 bg-slate-50 p-6 rounded-4xl border border-slate-100">
                 <h4 class="font-black text-sm text-emerald-600 uppercase tracking-widest mb-6">
                     {{ $isEditRekening ? 'Edit Data Rekening' : 'Tambah Rekening Baru' }}
                 </h4>
@@ -272,7 +272,7 @@
                                 class="block py-2.5 px-0 w-full text-sm text-slate-900 bg-transparent border-0 border-b-2 border-slate-300 appearance-none focus:outline-none focus:ring-0 focus:border-emerald-500 peer font-bold"
                                 placeholder=" " required />
                             <label for="nama_bank"
-                                class="peer-focus:font-black absolute text-[10px] text-slate-500 uppercase tracking-widest duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-emerald-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nama
+                                class="peer-focus:font-black absolute text-[10px] text-slate-500 uppercase tracking-widest duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-left peer-focus:left-0 peer-focus:text-emerald-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nama
                                 Bank (Cth: BSI)</label>
                             @error('nama_bank')
                                 <span class="text-xs text-rose-500 font-bold block mt-1">{{ $message }}</span>
@@ -284,7 +284,7 @@
                                 class="block py-2.5 px-0 w-full text-sm text-slate-900 bg-transparent border-0 border-b-2 border-slate-300 appearance-none focus:outline-none focus:ring-0 focus:border-emerald-500 peer font-black tabular-nums tracking-widest"
                                 placeholder=" " required />
                             <label for="nomor_rekening"
-                                class="peer-focus:font-black absolute text-[10px] text-slate-500 uppercase tracking-widest duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-emerald-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nomor
+                                class="peer-focus:font-black absolute text-[10px] text-slate-500 uppercase tracking-widest duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-left peer-focus:left-0 peer-focus:text-emerald-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nomor
                                 Rekening</label>
                             @error('nomor_rekening')
                                 <span class="text-xs text-rose-500 font-bold block mt-1">{{ $message }}</span>
@@ -296,7 +296,7 @@
                                 class="block py-2.5 px-0 w-full text-sm text-slate-900 bg-transparent border-0 border-b-2 border-slate-300 appearance-none focus:outline-none focus:ring-0 focus:border-emerald-500 peer font-bold"
                                 placeholder=" " required />
                             <label for="nama_akun"
-                                class="peer-focus:font-black absolute text-[10px] text-slate-500 uppercase tracking-widest duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-emerald-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Atas
+                                class="peer-focus:font-black absolute text-[10px] text-slate-500 uppercase tracking-widest duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-left peer-focus:left-0 peer-focus:text-emerald-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Atas
                                 Nama (A/N)</label>
                             @error('nama_akun')
                                 <span class="text-xs text-rose-500 font-bold block mt-1">{{ $message }}</span>
@@ -397,7 +397,7 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-[3rem] border border-slate-100 shadow-xl overflow-hidden min-h-[500px] relative">
+    <div class="bg-white rounded-[3rem] border border-slate-100 shadow-xl overflow-hidden min-h-125 relative">
         <div
             class="px-10 py-8 border-b border-slate-50 flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-50/30">
             <h3 class="font-black text-xl text-slate-800 uppercase tracking-tight">Riwayat Transaksi</h3>
@@ -527,7 +527,7 @@
 
     @if ($isModalOpen)
         <div
-            class="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 overflow-y-auto">
+            class="fixed inset-0 z-9999 flex items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 overflow-y-auto">
             <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-lg shadow-2xl relative">
                 <h3 class="text-xl font-black text-slate-800 uppercase tracking-tight mb-6">
                     {{ $isEditMode ? 'Edit' : 'Catat' }} Transaksi
@@ -767,7 +767,7 @@
     @endif
 
     @if ($isDeleteModalOpen)
-        <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-rose-900/90 backdrop-blur-sm p-4">
+        <div class="fixed inset-0 z-9999 flex items-center justify-center bg-rose-900/90 backdrop-blur-sm p-4">
             <div class="bg-white rounded-[2.5rem] p-10 w-full max-w-md text-center shadow-2xl">
                 <div
                     class="w-20 h-20 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-6 text-rose-500">
@@ -792,7 +792,7 @@
 
     @if ($showImageModal)
         <div
-            class="fixed inset-0 z-[10000] flex items-center justify-center bg-slate-950/95 backdrop-blur-md p-6 animate-fade-in">
+            class="fixed inset-0 z-10000 flex items-center justify-center bg-slate-950/95 backdrop-blur-md p-6 animate-fade-in">
             <div class="relative max-w-5xl w-full h-full flex flex-col items-center justify-center">
                 <button wire:click="closeImageModal"
                     class="absolute top-0 right-0 z-50 bg-white/10 p-3 rounded-full text-white hover:bg-rose-500 hover:text-white transition-all shadow-xl backdrop-blur-md border border-white/20">
@@ -802,7 +802,7 @@
                     </svg>
                 </button>
                 <img src="{{ $selectedImageUrl }}"
-                    class="max-w-full max-h-[90vh] rounded-[2rem] shadow-2xl object-contain border-4 border-slate-800">
+                    class="max-w-full max-h-[90vh] rounded-4xl shadow-2xl object-contain border-4 border-slate-800">
                 <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mt-4">Bukti Transaksi Digital</p>
             </div>
         </div>

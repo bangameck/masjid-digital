@@ -18,7 +18,7 @@
 
     <div x-show="$wire.isGenerating"
         x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-        style="display: none;" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-slate-900/95 backdrop-blur-md p-4 md:p-10 overflow-y-auto">
+        style="display: none;" class="fixed inset-0 z-9999 flex flex-col items-center justify-center bg-slate-900/95 backdrop-blur-md p-4 md:p-10 overflow-y-auto">
 
         <div class="w-full max-w-2xl mx-auto my-auto flex flex-col items-center justify-center space-y-8">
             <div class="orbit-container">
@@ -67,8 +67,8 @@
                 </div>
 
                 <div class="w-full bg-slate-950 rounded-full h-6 p-1 shadow-inner border border-white/5 overflow-hidden mb-4">
-                    <div class="bg-gradient-to-r from-emerald-600 to-emerald-400 h-full rounded-full transition-all duration-300 ease-out relative" :style="'width: ' + $wire.progress + '%'">
-                         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-full animate-shimmer"></div>
+                    <div class="bg-linear-to-r from-emerald-600 to-emerald-400 h-full rounded-full transition-all duration-300 ease-out relative" :style="'width: ' + $wire.progress + '%'">
+                         <div class="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent w-full animate-shimmer"></div>
                     </div>
                 </div>
                 <div class="text-4xl md:text-5xl font-black text-white tracking-tighter" x-text="$wire.progress + '%'"></div>
@@ -137,7 +137,7 @@
             </div>
         @endif
 
-        <div class="bg-white rounded-[3rem] border border-slate-100 shadow-xl overflow-hidden min-h-[500px]">
+        <div class="bg-white rounded-[3rem] border border-slate-100 shadow-xl overflow-hidden min-h-125">
             <div class="px-8 md:px-12 py-8 md:py-10 border-b border-slate-50 flex flex-col md:flex-row justify-between items-center bg-slate-50/30 gap-4">
                 <h3 class="font-black text-xl md:text-2xl text-slate-800 uppercase tracking-tight">Tabel Jadwal {{ $tahun_generate }}</h3>
                 <div class="bg-white px-4 py-2 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2">
@@ -178,7 +178,7 @@
 
                                             @if($canEdit)
                                                 @if($editingId === $item->id)
-                                                    <div class="mt-1 flex items-center gap-1 w-full max-w-[250px]">
+                                                    <div class="mt-1 flex items-center gap-1 w-full max-w-62.5">
                                                         <input type="text" wire:model="hijriahText" wire:keydown.enter="saveHijriah" class="w-full text-[10px] font-bold text-emerald-700 uppercase bg-emerald-50 border border-emerald-300 rounded-lg px-2 py-1 focus:ring-emerald-500 focus:border-emerald-500 shadow-inner transition-all">
 
                                                         <button wire:click="saveHijriah" class="p-1.5 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors shadow-sm" title="Simpan">

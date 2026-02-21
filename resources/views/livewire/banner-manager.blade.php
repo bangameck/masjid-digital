@@ -100,16 +100,16 @@
     <div class="mt-8">{{ $banners->links() }}</div>
 
     @if($isModalOpen && $canEdit)
-    <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 animate-fade-in">
+    <div class="fixed inset-0 z-9999 flex items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 animate-fade-in">
         <div class="bg-white rounded-[3rem] p-10 w-full max-w-2xl shadow-2xl relative overflow-hidden overflow-y-auto max-h-[90vh] custom-scrollbar">
-            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-500 to-emerald-300"></div>
+            <div class="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-emerald-500 to-emerald-300"></div>
 
             <div class="flex justify-between items-center mb-10">
                 <h3 class="text-2xl font-black text-slate-800 uppercase tracking-tight">{{ $isEditMode ? 'Edit' : 'Upload' }} Banner</h3>
 
                 <label class="relative inline-flex items-center cursor-pointer group">
                     <input type="checkbox" wire:model="is_active" class="sr-only peer">
-                    <div class="w-14 h-8 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-emerald-500 shadow-inner"></div>
+                    <div class="w-14 h-8 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-emerald-500 shadow-inner"></div>
                     <span class="ml-3 text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-emerald-500 transition-colors">
                         {{ $is_active ? 'Aktif' : 'Draft' }}
                     </span>
@@ -196,17 +196,17 @@
 
                 <div class="relative">
                     <input type="text" wire:model="judul" id="judul" class="floating-input peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" placeholder=" " />
-                    <label for="judul" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Judul Banner</label>
+                    <label for="judul" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Judul Banner</label>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="relative">
                         <input type="date" wire:model="tgl_mulai" id="tgl_mulai" class="floating-forced peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" />
-                        <label for="tgl_mulai" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Tanggal Mulai</label>
+                        <label for="tgl_mulai" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Tanggal Mulai</label>
                     </div>
                     <div class="relative">
                         <input type="date" wire:model="tgl_selesai" id="tgl_selesai" class="floating-forced peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" />
-                        <label for="tgl_selesai" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Tanggal Selesai</label>
+                        <label for="tgl_selesai" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Tanggal Selesai</label>
                     </div>
                 </div>
             </div>
@@ -220,7 +220,7 @@
     @endif
 
     @if($isDeleteModalOpen && $canEdit)
-    <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-rose-900/90 backdrop-blur-sm p-4 animate-fade-in">
+    <div class="fixed inset-0 z-9999 flex items-center justify-center bg-rose-900/90 backdrop-blur-sm p-4 animate-fade-in">
         <div class="bg-white rounded-[3rem] p-10 w-full max-w-md text-center shadow-2xl relative overflow-hidden">
             <div class="w-24 h-24 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-6 text-rose-500 shadow-inner">
                  <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>

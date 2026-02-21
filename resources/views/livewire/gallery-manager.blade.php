@@ -141,10 +141,10 @@
 
                     <div x-show="isUploading" class="w-full max-w-lg text-center space-y-3" x-transition style="display: none;">
                         <div class="flex justify-between items-end">
-                            <p class="text-[10px] font-black text-emerald-600 uppercase tracking-widest text-left"><span class="block text-slate-400">Proses:</span> <span x-text="currentFileName" class="truncate max-w-[200px] block"></span></p>
+                            <p class="text-[10px] font-black text-emerald-600 uppercase tracking-widest text-left"><span class="block text-slate-400">Proses:</span> <span x-text="currentFileName" class="truncate max-w-50 block"></span></p>
                             <p class="text-[10px] font-black text-emerald-600 uppercase tracking-widest text-right"><span x-text="filesProcessed"></span> / <span x-text="totalFiles"></span></p>
                         </div>
-                        <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden shadow-inner"><div class="bg-gradient-to-r from-emerald-400 to-emerald-600 h-full progress-bar-transition" :style="'width: ' + uploadProgress + '%'"></div></div>
+                        <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden shadow-inner"><div class="bg-linear-to-r from-emerald-400 to-emerald-600 h-full progress-bar-transition" :style="'width: ' + uploadProgress + '%'"></div></div>
                         <div class="flex justify-center gap-4 pt-2">
                             <div class="bg-white/50 px-3 py-1 rounded-lg border border-slate-200"><p class="text-[9px] font-bold text-slate-400 uppercase">Original</p><p class="text-xs font-black text-rose-500" x-text="formatBytes(totalOriginalSize)"></p></div>
                             <div class="flex items-center text-slate-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
@@ -233,31 +233,31 @@
     @endif
 
     @if($isModalOpen && $canEdit)
-        <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 animate-fade-in">
+        <div class="fixed inset-0 z-9999 flex items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 animate-fade-in">
             <div class="bg-white rounded-[2.5rem] p-10 w-full max-w-lg shadow-2xl relative overflow-hidden">
-                 <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-500 to-emerald-300"></div>
+                 <div class="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-emerald-500 to-emerald-300"></div>
                 <div class="flex justify-between items-center mb-8">
                     <h3 class="text-2xl font-black text-slate-800 uppercase tracking-tight">{{ $isEditMode ? 'Edit' : 'Buat' }} Album</h3>
                     <label class="relative inline-flex items-center cursor-pointer group">
                         <input type="checkbox" wire:model="is_active" class="sr-only peer">
-                        <div class="w-14 h-8 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-emerald-500 shadow-inner"></div>
+                        <div class="w-14 h-8 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-emerald-500 shadow-inner"></div>
                         <span class="ml-3 text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-emerald-500 transition-colors">{{ $is_active ? 'Publik' : 'Draft' }}</span>
                     </label>
                 </div>
                 <div class="space-y-6">
                     <div class="relative">
                         <input type="text" wire:model="nama_kegiatan" id="nama_kegiatan" class="floating-input peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" placeholder=" " />
-                        <label for="nama_kegiatan" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Nama Kegiatan</label>
+                        <label for="nama_kegiatan" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Nama Kegiatan</label>
                         @error('nama_kegiatan') <span class="text-[10px] text-rose-500 font-bold mt-1 ml-2">{{ $message }}</span> @enderror
                     </div>
                     <div class="relative">
                         <input type="date" wire:model="tanggal_kegiatan" id="tanggal_kegiatan" class="floating-input peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" placeholder=" " />
-                        <label for="tanggal_kegiatan" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Tanggal Pelaksanaan</label>
+                        <label for="tanggal_kegiatan" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Tanggal Pelaksanaan</label>
                         @error('tanggal_kegiatan') <span class="text-[10px] text-rose-500 font-bold mt-1 ml-2">{{ $message }}</span> @enderror
                     </div>
                     <div class="relative">
                         <textarea wire:model="deskripsi" id="deskripsi" rows="3" class="floating-input peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" placeholder=" "></textarea>
-                        <label for="deskripsi" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Deskripsi Singkat</label>
+                        <label for="deskripsi" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Deskripsi Singkat</label>
                     </div>
                 </div>
                 <div class="flex gap-4 mt-8 border-t border-slate-100 pt-6">
@@ -269,7 +269,7 @@
     @endif
 
     @if($isDeleteModalOpen && $canEdit)
-        <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-rose-900/90 backdrop-blur-sm p-4 animate-fade-in">
+        <div class="fixed inset-0 z-9999 flex items-center justify-center bg-rose-900/90 backdrop-blur-sm p-4 animate-fade-in">
             <div class="bg-white rounded-[2.5rem] p-10 w-full max-w-md text-center shadow-2xl relative overflow-hidden">
                 <div class="w-24 h-24 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-6 text-rose-500 shadow-inner"><svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></div>
                 <h3 class="text-2xl font-black text-slate-800 uppercase tracking-tight mb-2">Hapus Album?</h3>
@@ -283,7 +283,7 @@
     @endif
 
     @if($isDeletePhotoModalOpen && $canEdit)
-        <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-rose-900/90 backdrop-blur-sm p-4 animate-fade-in">
+        <div class="fixed inset-0 z-9999 flex items-center justify-center bg-rose-900/90 backdrop-blur-sm p-4 animate-fade-in">
             <div class="bg-white rounded-[2.5rem] p-10 w-full max-w-md text-center shadow-2xl relative overflow-hidden">
                 <div class="w-24 h-24 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-6 text-rose-500 shadow-inner"><svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></div>
                 <h3 class="text-2xl font-black text-slate-800 uppercase tracking-tight mb-2">Hapus Foto?</h3>

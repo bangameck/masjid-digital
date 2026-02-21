@@ -27,7 +27,7 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="bg-slate-900 p-8 rounded-[2.5rem] relative overflow-hidden shadow-2xl flex flex-col justify-between min-h-[180px]">
+        <div class="bg-slate-900 p-8 rounded-[2.5rem] relative overflow-hidden shadow-2xl flex flex-col justify-between min-h-45">
             <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
             <div>
                 <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-1">Total Saldo Kas</p>
@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-between min-h-[180px]">
+        <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-between min-h-45">
             <div>
                 <div class="flex justify-between items-start">
                     <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-1">Pemasukan Bulan Ini</p>
@@ -57,7 +57,7 @@
             <p class="text-[10px] text-slate-400 font-bold mt-4">Bulan: {{ \Carbon\Carbon::create()->month((int)$bulan_filter)->translatedFormat('F') }}</p>
         </div>
 
-        <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-between min-h-[180px]">
+        <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-between min-h-45">
              <div>
                 <div class="flex justify-between items-start">
                     <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-1">Pengeluaran Bulan Ini</p>
@@ -77,14 +77,14 @@
                 <h3 class="font-black text-lg text-slate-800 uppercase tracking-tight shrink-0">Statistik Arus Kas</h3>
 
                 <div class="flex flex-wrap items-center gap-2">
-                    <select wire:model.live="sub_kategori_filter" class="bg-emerald-50 text-emerald-700 border-none rounded-xl text-xs font-bold py-2 focus:ring-0 cursor-pointer max-w-[140px] truncate">
+                    <select wire:model.live="sub_kategori_filter" class="bg-emerald-50 text-emerald-700 border-none rounded-xl text-xs font-bold py-2 focus:ring-0 cursor-pointer max-w-35 truncate">
                         <option value="">Semua Jenis</option>
                         @foreach($availableSubKategoris as $sub)
                             <option value="{{ $sub }}">{{ $sub }}</option>
                         @endforeach
                     </select>
 
-                    <div class="h-6 w-[1px] bg-slate-200 mx-1"></div>
+                    <div class="h-6 w-px bg-slate-200 mx-1"></div>
 
                     <button wire:click="exportPdf" wire:loading.attr="disabled" class="bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center gap-2 shadow-lg">
                         <svg wire:loading wire:target="exportPdf" class="animate-spin h-3 w-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
@@ -92,7 +92,7 @@
                         Unduh Laporan
                     </button>
 
-                    <div class="h-6 w-[1px] bg-slate-200 mx-1"></div>
+                    <div class="h-6 w-px bg-slate-200 mx-1"></div>
 
                     <select wire:model.live="bulan_filter" class="bg-slate-50 border-none rounded-xl text-xs font-bold text-slate-700 py-2 focus:ring-0 cursor-pointer">
                         @foreach(range(1,12) as $m)
@@ -130,7 +130,7 @@
         <h3 class="font-black text-xl text-slate-800 uppercase tracking-tight mb-6">Rekening Infaq & Sedekah</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse($rekenings as $rek)
-                <div class="bg-slate-50 border border-slate-200 rounded-[2rem] p-6 hover:-translate-y-1 transition-transform">
+                <div class="bg-slate-50 border border-slate-200 rounded-4xl p-6 hover:-translate-y-1 transition-transform">
                     <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-4 border border-emerald-200">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
                     </div>
@@ -146,7 +146,7 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-[3rem] border border-slate-100 shadow-xl overflow-hidden min-h-[500px] relative">
+    <div class="bg-white rounded-[3rem] border border-slate-100 shadow-xl overflow-hidden min-h-125 relative">
         <div class="px-10 py-8 border-b border-slate-50 flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-50/30">
              <h3 class="font-black text-xl text-slate-800 uppercase tracking-tight">Riwayat Transaksi</h3>
 
@@ -214,12 +214,12 @@
     </div>
 
     @if($showImageModal)
-    <div class="fixed inset-0 z-[10000] flex items-center justify-center bg-slate-950/95 backdrop-blur-md p-6 animate-fade-in">
+    <div class="fixed inset-0 z-10000 flex items-center justify-center bg-slate-950/95 backdrop-blur-md p-6 animate-fade-in">
         <div class="relative max-w-5xl w-full h-full flex flex-col items-center justify-center">
             <button wire:click="closeImageModal" class="absolute top-0 right-0 z-50 bg-white/10 p-3 rounded-full text-white hover:bg-rose-500 hover:text-white transition-all shadow-xl backdrop-blur-md border border-white/20">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <img src="{{ $selectedImageUrl }}" class="max-w-full max-h-[90vh] rounded-[2rem] shadow-2xl object-contain border-4 border-slate-800">
+            <img src="{{ $selectedImageUrl }}" class="max-w-full max-h-[90vh] rounded-4xl shadow-2xl object-contain border-4 border-slate-800">
             <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mt-4">Bukti Transaksi Digital</p>
         </div>
     </div>

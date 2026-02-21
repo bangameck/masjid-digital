@@ -110,7 +110,7 @@
 
             <div class="p-10 space-y-4">
                 @forelse($data as $item)
-                    <div class="group flex flex-col md:flex-row items-start md:items-center justify-between p-6 bg-slate-50 rounded-[2rem] border border-slate-100 hover:border-emerald-200 hover:bg-white hover:shadow-xl transition-all duration-300 gap-4">
+                    <div class="group flex flex-col md:flex-row items-start md:items-center justify-between p-6 bg-slate-50 rounded-4xl border border-slate-100 hover:border-emerald-200 hover:bg-white hover:shadow-xl transition-all duration-300 gap-4">
                         <div class="flex items-center gap-6 w-full md:w-auto">
                             <div class="w-12 h-12 rounded-2xl flex items-center justify-center font-black text-xs shadow-inner shrink-0
                                 @if($item->tipe == 'ayat') bg-blue-100 text-blue-600 @elseif($item->tipe == 'hadits') bg-purple-100 text-purple-600 @elseif($item->tipe == 'ucapan') bg-amber-100 text-amber-600 @else bg-emerald-100 text-emerald-600 @endif">
@@ -155,16 +155,16 @@
         </div>
 
         @if($isModalOpen && $canEdit)
-        <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 animate-fade-in">
+        <div class="fixed inset-0 z-9999 flex items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 animate-fade-in">
             <div class="bg-white rounded-[2.5rem] p-10 w-full max-w-lg shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-500 to-emerald-300"></div>
+                <div class="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-emerald-500 to-emerald-300"></div>
 
                 <div class="flex justify-between items-center mb-8">
                     <h3 class="text-2xl font-black text-slate-800 uppercase tracking-tight">{{ $isEditMode ? 'Ubah' : 'Tambah' }} Pesan</h3>
 
                     <label class="relative inline-flex items-center cursor-pointer group">
                         <input type="checkbox" wire:model="is_active" class="sr-only peer">
-                        <div class="w-14 h-8 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-emerald-500 shadow-inner"></div>
+                        <div class="w-14 h-8 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-emerald-500 shadow-inner"></div>
                         <span class="ml-3 text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-emerald-500 transition-colors">
                             {{ $is_active ? 'Tampil' : 'Sembunyi' }}
                         </span>
@@ -223,7 +223,7 @@
         @endif
 
         @if($isDeleteModalOpen && $canEdit)
-        <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-rose-900/90 backdrop-blur-sm p-4 animate-fade-in">
+        <div class="fixed inset-0 z-9999 flex items-center justify-center bg-rose-900/90 backdrop-blur-sm p-4 animate-fade-in">
             <div class="bg-white rounded-[2.5rem] p-10 w-full max-w-md text-center shadow-2xl relative overflow-hidden">
                 <div class="w-24 h-24 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-6 text-rose-500 shadow-inner">
                     <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>

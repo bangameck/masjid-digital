@@ -43,7 +43,7 @@
             @if($setting && $setting->bg_login_path)
                 <img src="{{ Storage::url($setting->bg_login_path) }}" class="w-full h-full object-cover">
             @else
-                <div class="w-full h-full bg-gradient-to-br from-emerald-600 to-slate-900"></div>
+                <div class="w-full h-full bg-linear-to-br from-emerald-600 to-slate-900"></div>
             @endif
             <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
         </div>

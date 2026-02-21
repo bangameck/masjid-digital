@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-[3.5rem] border border-slate-100 shadow-2xl shadow-slate-200/40 overflow-hidden min-h-[500px] relative">
+    <div class="bg-white rounded-[3.5rem] border border-slate-100 shadow-2xl shadow-slate-200/40 overflow-hidden min-h-125 relative">
         <div class="px-12 py-10 border-b border-slate-50 flex flex-col md:flex-row justify-between items-center bg-slate-50/30 gap-4">
             <div class="relative w-full md:w-auto">
                 <input wire:model.live="search" type="text" placeholder="Cari data..." class="pl-12 pr-6 py-3 bg-white border border-slate-200 rounded-2xl text-sm font-bold text-slate-700 focus:ring-emerald-500 focus:border-emerald-500 w-full md:w-80 shadow-sm transition-all">
@@ -60,14 +60,14 @@
         </div>
 
         @if (session()->has('message'))
-            <div class="fixed top-6 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-8 py-4 rounded-2xl font-black text-xs shadow-[0_10px_40px_rgba(16,185,129,0.5)] z-[99999] animate-bounce flex items-center gap-3">
+            <div class="fixed top-6 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-8 py-4 rounded-2xl font-black text-xs shadow-[0_10px_40px_rgba(16,185,129,0.5)] z-99999 animate-bounce flex items-center gap-3">
                 <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
                 {{ session('message') }}
             </div>
         @endif
 
         @if (session()->has('error'))
-            <div class="fixed top-6 left-1/2 -translate-x-1/2 bg-rose-500 text-white px-8 py-4 rounded-2xl font-black text-xs shadow-[0_10px_40px_rgba(244,63,94,0.5)] z-[99999] animate-bounce flex items-center gap-3">
+            <div class="fixed top-6 left-1/2 -translate-x-1/2 bg-rose-500 text-white px-8 py-4 rounded-2xl font-black text-xs shadow-[0_10px_40px_rgba(244,63,94,0.5)] z-99999 animate-bounce flex items-center gap-3">
                 <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 {{ session('error') }}
             </div>
@@ -139,7 +139,7 @@
     </div>
 
     @if ($isModalOpen && $canEdit)
-        <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/80 backdrop-blur-md p-4">
+        <div class="fixed inset-0 z-9999 flex items-center justify-center bg-slate-900/80 backdrop-blur-md p-4">
             <div class="bg-white rounded-[2.5rem] p-8 md:p-10 w-full max-w-3xl shadow-2xl relative overflow-hidden animate-fade-in max-h-[90vh] overflow-y-auto modal-scroll">
 
                 <div class="flex justify-between items-center mb-8 border-b border-slate-100 pb-6">
@@ -227,7 +227,7 @@
                             <div class="w-full md:w-2/3 grid grid-cols-1 gap-6">
                                 <div class="relative mt-2">
                                     <input type="text" id="nama_pengurus" wire:model="nama_pengurus" class="floating-input block w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 text-sm font-bold text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 transition-colors" placeholder=" " />
-                                    <label for="nama_pengurus" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Nama Lengkap</label>
+                                    <label for="nama_pengurus" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Nama Lengkap</label>
                                     @error('nama_pengurus') <span class="text-[10px] text-rose-500 font-bold uppercase mt-1 ml-2 block">{{ $message }}</span> @enderror
                                 </div>
 
@@ -244,13 +244,13 @@
                                         <option value="Marbot">Marbot</option>
                                         <option value="Lainnya">Lainnya...</option>
                                     </select>
-                                    <label for="jabatan" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Pilih Jabatan</label>
+                                    <label for="jabatan" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Pilih Jabatan</label>
                                     @error('jabatan') <span class="text-[10px] text-rose-500 font-bold uppercase mt-1 ml-2 block">{{ $message }}</span> @enderror
                                 </div>
 
                                 <div class="relative mt-2">
                                     <input type="text" id="no_hp" wire:model="no_hp" class="floating-input block w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 text-sm font-bold text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 transition-colors" placeholder=" " />
-                                    <label for="no_hp" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">No. HP / WhatsApp</label>
+                                    <label for="no_hp" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">No. HP / WhatsApp</label>
                                 </div>
                             </div>
                         </div>
@@ -263,13 +263,13 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 relative z-10">
                                 <div class="relative mt-2">
                                     <input type="email" id="email" wire:model="email" class="floating-input block w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 text-sm font-bold text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 transition-colors" placeholder=" " />
-                                    <label for="email" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Alamat Email</label>
+                                    <label for="email" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Alamat Email</label>
                                     @error('email') <span class="text-[10px] text-rose-500 font-bold mt-1 ml-2 block">{{ $message }}</span> @enderror
                                 </div>
 
                                 <div class="relative mt-2" x-data="{ show: false }">
                                     <input :type="show ? 'text' : 'password'" id="password" wire:model="password" class="floating-input block w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 text-sm font-bold text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 transition-colors pr-12" placeholder=" " />
-                                    <label for="password" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">{{ $isEditMode ? 'Ganti Password (Opsional)' : 'Password Baru' }}</label>
+                                    <label for="password" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">{{ $isEditMode ? 'Ganti Password (Opsional)' : 'Password Baru' }}</label>
 
                                     <button type="button" @click="show = !show" class="absolute right-4 top-4 text-slate-400 hover:text-emerald-500 transition-colors">
                                         <svg x-show="!show" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
@@ -284,19 +284,19 @@
                         <div class="space-y-6">
                             <div class="relative mt-2">
                                 <input type="text" id="name" wire:model="name" class="floating-input block w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 text-sm font-bold text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 transition-colors" placeholder=" " />
-                                <label for="name" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Nama Superadmin</label>
+                                <label for="name" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Nama Superadmin</label>
                                 @error('name') <span class="text-[10px] text-rose-500 font-bold mt-1 ml-2 block">{{ $message }}</span> @enderror
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="relative mt-2">
                                     <input type="email" id="email_admin" wire:model="email" class="floating-input block w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 text-sm font-bold text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 transition-colors" placeholder=" " />
-                                    <label for="email_admin" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Email Login</label>
+                                    <label for="email_admin" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Email Login</label>
                                     @error('email') <span class="text-[10px] text-rose-500 font-bold mt-1 ml-2 block">{{ $message }}</span> @enderror
                                 </div>
 
                                 <div class="relative mt-2" x-data="{ show: false }">
                                     <input :type="show ? 'text' : 'password'" id="password_admin" wire:model="password" class="floating-input block w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 text-sm font-bold text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 transition-colors pr-12" placeholder=" " />
-                                    <label for="password_admin" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">{{ $isEditMode ? 'Ganti Password (Opsional)' : 'Password' }}</label>
+                                    <label for="password_admin" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">{{ $isEditMode ? 'Ganti Password (Opsional)' : 'Password' }}</label>
 
                                     <button type="button" @click="show = !show" class="absolute right-4 top-4 text-slate-400 hover:text-emerald-500 transition-colors">
                                         <svg x-show="!show" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
@@ -323,9 +323,9 @@
     @endif
 
     @if ($isDeleteModalOpen && $canEdit)
-        <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-rose-900/80 backdrop-blur-md p-4">
+        <div class="fixed inset-0 z-9999 flex items-center justify-center bg-rose-900/80 backdrop-blur-md p-4">
             <div class="bg-white rounded-[2.5rem] p-10 w-full max-w-md text-center shadow-2xl animate-fade-in relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-rose-500 to-rose-300"></div>
+                <div class="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-rose-500 to-rose-300"></div>
                 <div class="w-24 h-24 bg-rose-50 border-[6px] border-white shadow-lg rounded-full flex items-center justify-center mx-auto mb-6 text-rose-500 relative z-10">
                     <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                 </div>

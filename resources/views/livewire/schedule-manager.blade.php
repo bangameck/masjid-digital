@@ -14,7 +14,7 @@
         }
     </style>
 
-    <div x-show="showToast" x-transition class="fixed top-5 right-5 z-[10000] bg-rose-500 text-white px-6 py-4 rounded-xl shadow-2xl font-bold text-sm flex items-center gap-3">
+    <div x-show="showToast" x-transition class="fixed top-5 right-5 z-10000 bg-rose-500 text-white px-6 py-4 rounded-xl shadow-2xl font-bold text-sm flex items-center gap-3">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         <span x-text="toastMessage"></span>
     </div>
@@ -121,9 +121,9 @@
     <div class="mt-8 px-4">{{ $data->links() }}</div>
 
     @if($isModalOpen && $canEdit)
-    <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 animate-fade-in">
+    <div class="fixed inset-0 z-9999 flex items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 animate-fade-in">
         <div class="bg-white rounded-[2.5rem] p-10 w-full max-w-2xl shadow-2xl relative overflow-hidden max-h-[90vh] overflow-y-auto custom-scrollbar">
-             <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-500 to-emerald-300"></div>
+             <div class="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-emerald-500 to-emerald-300"></div>
 
             <h3 class="text-2xl font-black text-slate-800 uppercase tracking-tight mb-8">
                 {{ $isEditMode ? 'Edit' : 'Tambah' }} Jadwal <span class="text-emerald-500">{{ ucfirst($activeTab) }}</span>
@@ -139,7 +139,7 @@
                                     <option value="{{ $year }}">{{ $year }}</option>
                                 @endforeach
                             </select>
-                            <label class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Pilih Tahun</label>
+                            <label class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Pilih Tahun</label>
                         </div>
                         <div class="relative">
                             <select wire:model="tanggal" class="floating-forced peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 font-bold">
@@ -148,7 +148,7 @@
                                     <option value="{{ $rd['value'] }}">{{ $rd['label'] }}</option>
                                 @endforeach
                             </select>
-                            <label class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Tanggal Ramadhan</label>
+                            <label class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Tanggal Ramadhan</label>
                         </div>
 
                     @elseif($activeTab == 'jumat')
@@ -156,14 +156,14 @@
                             <input type="date" wire:model.live="tanggal" id="tanggal"
                                 @change="const day = new Date($el.value).getDay(); if(day !== 5 && $el.value !== '') { alert('Mohon pilih hari Jumat!'); $el.value = ''; @this.set('tanggal', ''); }"
                                 class="floating-forced peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" placeholder=" " />
-                            <label for="tanggal" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Tanggal (Jumat)</label>
+                            <label for="tanggal" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Tanggal (Jumat)</label>
                             @error('tanggal') <span class="text-[10px] text-rose-500 font-bold mt-1 ml-2">{{ $message }}</span> @enderror
                         </div>
 
                     @else
                         <div class="relative">
                             <input type="date" wire:model="tanggal" id="tanggal" class="floating-forced peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" placeholder=" " />
-                            <label for="tanggal" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Tanggal</label>
+                            <label for="tanggal" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Tanggal</label>
                             @error('tanggal') <span class="text-[10px] text-rose-500 font-bold mt-1 ml-2">{{ $message }}</span> @enderror
                         </div>
                     @endif
@@ -171,7 +171,7 @@
                     @if($activeTab == 'ramadhan')
                         <div class="relative">
                             <input type="number" wire:model="malam_ke" id="malam_ke" class="floating-input peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" placeholder=" " />
-                            <label for="malam_ke" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Malam Ke-</label>
+                            <label for="malam_ke" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Malam Ke-</label>
                         </div>
                     @elseif($activeTab == 'ied')
                         <div class="relative">
@@ -179,7 +179,7 @@
                                 <option value="Idul Fitri">Idul Fitri</option>
                                 <option value="Idul Adha">Idul Adha</option>
                             </select>
-                            <label for="ied_type" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Jenis Ied</label>
+                            <label for="ied_type" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Jenis Ied</label>
                         </div>
                     @endif
                 </div>
@@ -187,34 +187,34 @@
                 <div class="relative">
                     @if($activeTab == 'jumat' || $activeTab == 'ied')
                         <input type="text" wire:model="khatib" id="khatib" class="floating-input peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" placeholder=" " />
-                        <label for="khatib" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Nama Khatib</label>
+                        <label for="khatib" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Nama Khatib</label>
                         @error('khatib') <span class="text-[10px] text-rose-500 font-bold mt-1 ml-2">{{ $message }}</span> @enderror
                     @else
                         <input type="text" wire:model="penceramah" id="penceramah" class="floating-input peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" placeholder=" " />
-                        <label for="penceramah" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Nama Penceramah</label>
+                        <label for="penceramah" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Nama Penceramah</label>
                         @error('penceramah') <span class="text-[10px] text-rose-500 font-bold mt-1 ml-2">{{ $message }}</span> @enderror
                     @endif
                 </div>
 
                 <div class="relative">
                     <textarea wire:model="judul_ceramah" id="judul_ceramah" rows="2" class="floating-input peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" placeholder=" "></textarea>
-                    <label for="judul_ceramah" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Judul / Tema Ceramah</label>
+                    <label for="judul_ceramah" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Judul / Tema Ceramah</label>
                 </div>
 
                 @if($activeTab != 'rutin')
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="relative">
                             <input type="text" wire:model="imam" id="imam" class="floating-input peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" placeholder=" " />
-                            <label for="imam" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Nama Imam</label>
+                            <label for="imam" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Nama Imam</label>
                             @error('imam') <span class="text-[10px] text-rose-500 font-bold mt-1 ml-2">{{ $message }}</span> @enderror
                         </div>
                         <div class="relative">
                             <input type="text" wire:model="muadzin" id="muadzin" class="floating-input peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" placeholder=" " />
-                            <label for="muadzin" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Muadzin</label>
+                            <label for="muadzin" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Muadzin</label>
                         </div>
                         <div class="relative">
                             <input type="text" wire:model="bilal" id="bilal" class="floating-input peer block w-full appearance-none rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-0 placeholder-transparent font-bold" placeholder=" " />
-                            <label for="bilal" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">Bilal</label>
+                            <label for="bilal" class="absolute top-4 left-5 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">Bilal</label>
                         </div>
                     </div>
                 @endif
@@ -229,7 +229,7 @@
     @endif
 
     @if($isDeleteModalOpen && $canEdit)
-    <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-rose-900/90 backdrop-blur-sm p-4 animate-fade-in">
+    <div class="fixed inset-0 z-9999 flex items-center justify-center bg-rose-900/90 backdrop-blur-sm p-4 animate-fade-in">
         <div class="bg-white rounded-[2.5rem] p-10 w-full max-w-md text-center shadow-2xl relative overflow-hidden">
             <div class="w-24 h-24 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-6 text-rose-500 shadow-inner">
                  <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>

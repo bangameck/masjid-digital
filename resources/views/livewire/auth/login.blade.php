@@ -1,6 +1,6 @@
 <div class="bg-white rounded-[3.5rem] shadow-2xl overflow-hidden border border-white/20">
 
-    <div class="h-2 w-full bg-gradient-to-r from-emerald-500 to-emerald-300"></div>
+    <div class="h-2 w-full bg-linear-to-r from-emerald-500 to-emerald-300"></div>
 
     <div class="p-10 md:p-12">
 
@@ -34,7 +34,7 @@
                 <input wire:model="email" type="email" id="email" required placeholder=" "
                     class="floating-input peer block w-full appearance-none rounded-2xl border border-slate-200 bg-slate-50/50 px-6 py-4 text-slate-900 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-0 placeholder-transparent font-bold transition-all" />
                 <label for="email"
-                    class="absolute top-4 left-6 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">
+                    class="absolute top-4 left-6 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">
                     Email Address
                 </label>
                 @error('email')
@@ -47,7 +47,7 @@
                 <input wire:model="password" :type="show ? 'text' : 'password'" id="password" required placeholder=" "
                     class="floating-input peer block w-full appearance-none rounded-2xl border border-slate-200 bg-slate-50/50 px-6 py-4 pr-12 text-slate-900 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-0 placeholder-transparent font-bold transition-all" />
                 <label for="password"
-                    class="absolute top-4 left-6 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-[0]">
+                    class="absolute top-4 left-6 text-slate-400 transition-all duration-200 ease-out pointer-events-none origin-left">
                     Password
                 </label>
 

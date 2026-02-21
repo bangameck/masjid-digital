@@ -213,7 +213,7 @@
                         </svg></div>
                 </div>
 
-                <div id="map" class="w-full h-80 rounded-[1.5rem] z-0 border-2 border-slate-200 shadow-inner">
+                <div id="map" class="w-full h-80 rounded-3xl z-0 border-2 border-slate-200 shadow-inner">
                 </div>
 
                 <script>
@@ -548,7 +548,7 @@
                         class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 block">Background
                         TV (Otomatis Tersimpan)</label>
                     <div
-                        class="relative w-full h-48 rounded-[2rem] bg-slate-100 border-2 border-dashed border-slate-300 overflow-hidden shadow-sm transition
+                        class="relative w-full h-48 rounded-4xl bg-slate-100 border-2 border-dashed border-slate-300 overflow-hidden shadow-sm transition
                 {{ $canEdit ? 'hover:border-emerald-400 group cursor-pointer' : 'opacity-60 cursor-not-allowed' }}">
 
                         <input type="file"

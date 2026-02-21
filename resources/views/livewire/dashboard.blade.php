@@ -1,7 +1,7 @@
 <div class="space-y-6 md:space-y-8 pb-10">
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white p-6 md:p-8 rounded-[2rem] border border-slate-100 shadow-sm relative overflow-hidden">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white p-6 md:p-8 rounded-4xl border border-slate-100 shadow-sm relative overflow-hidden">
         <div class="absolute -right-10 -top-10 w-40 h-40 bg-{{ $theme_color }}-50 rounded-full blur-3xl opacity-50"></div>
 
         <div class="relative z-10">
@@ -34,7 +34,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
-        <div class="bg-gradient-to-br from-{{ $theme_color }}-500 to-{{ $theme_color }}-700 p-6 rounded-[2rem] shadow-lg shadow-{{ $theme_color }}-500/30 text-white relative overflow-hidden group">
+        <div class="bg-linear-to-br from-{{ $theme_color }}-500 to-{{ $theme_color }}-700 p-6 rounded-4xl shadow-lg shadow-{{ $theme_color }}-500/30 text-white relative overflow-hidden group">
             <div class="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
             <div class="relative z-10">
                 <p class="text-[10px] font-black uppercase tracking-widest text-{{ $theme_color }}-100 mb-1">Total Saldo Kas</p>
@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col justify-center relative overflow-hidden">
+        <div class="bg-white p-6 rounded-4xl border border-slate-100 shadow-sm flex flex-col justify-center relative overflow-hidden">
             <div class="flex justify-between items-start mb-2">
                 <div class="p-2 bg-emerald-50 text-emerald-500 rounded-xl"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg></div>
                 <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Bulan Ini</span>
@@ -55,7 +55,7 @@
             <h3 class="text-2xl font-black text-slate-800 tracking-tight">Rp {{ number_format($pemasukanBulanIni, 0, ',', '.') }}</h3>
         </div>
 
-        <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col justify-center relative overflow-hidden">
+        <div class="bg-white p-6 rounded-4xl border border-slate-100 shadow-sm flex flex-col justify-center relative overflow-hidden">
             <div class="flex justify-between items-start mb-2">
                 <div class="p-2 bg-rose-50 text-rose-500 rounded-xl"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg></div>
                 <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Bulan Ini</span>
@@ -64,7 +64,7 @@
             <h3 class="text-2xl font-black text-slate-800 tracking-tight">Rp {{ number_format($pengeluaranBulanIni, 0, ',', '.') }}</h3>
         </div>
 
-        <div class="bg-slate-900 p-6 rounded-[2rem] shadow-xl text-white relative overflow-hidden group">
+        <div class="bg-slate-900 p-6 rounded-4xl shadow-xl text-white relative overflow-hidden group">
             <div class="absolute -right-4 -bottom-4 text-white/5 w-24 h-24 rotate-12 group-hover:rotate-45 transition-transform duration-700"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg></div>
             <div class="relative z-10 flex flex-col h-full justify-between">
                 <div>
@@ -87,17 +87,17 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-        <div class="md:col-span-2 bg-white p-6 md:p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+        <div class="md:col-span-2 bg-white p-6 md:p-8 rounded-4xl border border-slate-100 shadow-sm">
             <div class="flex justify-between items-center mb-6">
                 <div>
                     <h3 class="text-lg font-black text-slate-800 tracking-tight">Trend Keuangan</h3>
                     <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">1 Tahun Terakhir (12 Bulan)</p>
                 </div>
             </div>
-            <div id="financeChart" class="w-full h-[300px]"></div>
+            <div id="financeChart" class="w-full h-75"></div>
         </div>
 
-        <div class="bg-white p-6 md:p-8 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col">
+        <div class="bg-white p-6 md:p-8 rounded-4xl border border-slate-100 shadow-sm flex flex-col">
             <h3 class="text-lg font-black text-slate-800 tracking-tight mb-1">Rincian Bulan Ini</h3>
             <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Berdasarkan Sub-Kategori</p>
 
@@ -144,8 +144,8 @@
         @if($pengurus->count() > 0)
             <div class="flex gap-4 overflow-x-auto pb-6 pt-2 px-2 custom-scrollbar snap-x">
                 @foreach($pengurus as $person)
-                    <div class="snap-start shrink-0 w-[180px] bg-white border border-slate-100 rounded-[2rem] p-5 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden group">
-                        <div class="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-{{ $theme_color }}-50 to-white transition-colors"></div>
+                    <div class="snap-start shrink-0 w-45 bg-white border border-slate-100 rounded-4xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden group">
+                        <div class="absolute top-0 inset-x-0 h-16 bg-linear-to-b from-{{ $theme_color }}-50 to-white transition-colors"></div>
 
                         <div class="relative z-10 w-20 h-20 rounded-full border-4 border-white shadow-md overflow-hidden mb-3 bg-white">
                             @if($person->foto_path)
@@ -172,7 +172,7 @@
                 @endforeach
             </div>
         @else
-            <div class="bg-white border border-slate-100 rounded-[2rem] p-8 text-center shadow-sm">
+            <div class="bg-white border border-slate-100 rounded-4xl p-8 text-center shadow-sm">
                 <div class="w-16 h-16 bg-slate-50 text-slate-300 rounded-full flex items-center justify-center mx-auto mb-3">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                 </div>
@@ -185,28 +185,28 @@
     <div class="mt-4">
         <h3 class="font-black text-lg text-slate-800 mb-4 px-2 tracking-tight">Aksi Cepat</h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <a href="/keuangan-masjid" wire:navigate class="flex flex-col items-center justify-center p-6 bg-white border border-slate-200 rounded-[2rem] hover:border-{{ $theme_color }}-500 hover:bg-{{ $theme_color }}-50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group">
+            <a href="/keuangan-masjid" wire:navigate class="flex flex-col items-center justify-center p-6 bg-white border border-slate-200 rounded-4xl hover:border-{{ $theme_color }}-500 hover:bg-{{ $theme_color }}-50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group">
                 <div class="w-14 h-14 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center mb-3 group-hover:bg-{{ $theme_color }}-500 group-hover:text-white transition-colors shadow-inner">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                 </div>
                 <span class="font-bold text-sm text-slate-600 group-hover:text-{{ $theme_color }}-700">Input Kas</span>
             </a>
 
-            <a href="/running-text" wire:navigate class="flex flex-col items-center justify-center p-6 bg-white border border-slate-200 rounded-[2rem] hover:border-{{ $theme_color }}-500 hover:bg-{{ $theme_color }}-50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group">
+            <a href="/running-text" wire:navigate class="flex flex-col items-center justify-center p-6 bg-white border border-slate-200 rounded-4xl hover:border-{{ $theme_color }}-500 hover:bg-{{ $theme_color }}-50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group">
                 <div class="w-14 h-14 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center mb-3 group-hover:bg-{{ $theme_color }}-500 group-hover:text-white transition-colors shadow-inner">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                 </div>
                 <span class="font-bold text-sm text-slate-600 group-hover:text-{{ $theme_color }}-700">Running Text</span>
             </a>
 
-            <a href="/banner" wire:navigate class="flex flex-col items-center justify-center p-6 bg-white border border-slate-200 rounded-[2rem] hover:border-{{ $theme_color }}-500 hover:bg-{{ $theme_color }}-50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group">
+            <a href="/banner" wire:navigate class="flex flex-col items-center justify-center p-6 bg-white border border-slate-200 rounded-4xl hover:border-{{ $theme_color }}-500 hover:bg-{{ $theme_color }}-50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group">
                 <div class="w-14 h-14 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center mb-3 group-hover:bg-{{ $theme_color }}-500 group-hover:text-white transition-colors shadow-inner">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                 </div>
                 <span class="font-bold text-sm text-slate-600 group-hover:text-{{ $theme_color }}-700">Kelola Banner</span>
             </a>
 
-            <a href="/settings" wire:navigate class="flex flex-col items-center justify-center p-6 bg-white border border-slate-200 rounded-[2rem] hover:border-{{ $theme_color }}-500 hover:bg-{{ $theme_color }}-50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group">
+            <a href="/settings" wire:navigate class="flex flex-col items-center justify-center p-6 bg-white border border-slate-200 rounded-4xl hover:border-{{ $theme_color }}-500 hover:bg-{{ $theme_color }}-50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group">
                 <div class="w-14 h-14 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center mb-3 group-hover:bg-{{ $theme_color }}-500 group-hover:text-white transition-colors shadow-inner">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                 </div>

@@ -35,7 +35,7 @@
         <a href="javascript:void(0)" @click="confirmLogout = true"
            class="flex items-center gap-3 p-2 rounded-2xl bg-white/5 border border-white/5 hover:bg-rose-500/10 hover:border-rose-500/30 transition-all duration-300 group cursor-pointer">
 
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white font-black text-sm shadow-lg shadow-emerald-900/20 shrink-0 overflow-hidden relative">
+            <div class="w-10 h-10 rounded-xl bg-linear-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white font-black text-sm shadow-lg shadow-emerald-900/20 shrink-0 overflow-hidden relative">
                 @if(auth()->user()->pengurus && auth()->user()->pengurus->foto_path)
                     <img src="{{ Storage::url(auth()->user()->pengurus->foto_path) }}" class="w-full h-full object-cover">
                 @else

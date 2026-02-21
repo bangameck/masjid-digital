@@ -151,7 +151,7 @@ Sistem tab rapi untuk mengelola berbagai agenda dakwah:
 
 - 🧑‍💻 **Developer:** [@bangameck](https://instagram.com/bangameck)
 - 📍 **Lokasi:** Pekanbaru, Riau, Indonesia 🇮🇩
-- 🎯 **Visi:** *Membangun digitalisasi masjid untuk umat yang lebih baik.*
+- 🎯 **Tujuan Aplikasi ini:** *Membangun digitalisasi masjid untuk umat yang lebih baik.*
 
 ### ☕ Support Developer
 Jika aplikasi **Masjid Digital** ini bermanfaat untuk masjid di tempatmu, dukung pengembangannya agar terus di-*update* dan bebas *bug*! 
