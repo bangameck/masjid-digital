@@ -77,7 +77,8 @@
                         Lihat Saja</span>
                     <p class="text-[11px] font-bold text-amber-700 leading-tight">
                         Role kamu : <span
-                            class="underline uppercase decoration-amber-300 decoration-2">{{ auth()->user()->role }}</span>. Kamu hanya
+                            class="underline uppercase decoration-amber-300 decoration-2">{{ auth()->user()->role }}</span>.
+                        Kamu hanya
                         dapat melihat informasi dan tidak dapat mengubah inputan nya.
                     </p>
                 </div>
@@ -241,9 +242,11 @@
                                     this.updateCoords(pos.lat, pos.lng);
                                 });
                                 this.map.on('click', (e) => {
-                                    this.marker.setLatLng(e.latlng);
-                                    this.updateCoords(e.latlng.lat, e.latlng.lng);
-                                    this.map.panTo(e.latlng);
+                                    if (@js($canEdit)) {
+                                        this.marker.setLatLng(e.latlng);
+                                        this.updateCoords(e.latlng.lat, e.latlng.lng);
+                                        this.map.panTo(e.latlng);
+                                    }
                                 });
                             },
                             updateCoords(lat, lng) {
@@ -348,7 +351,6 @@
                         <div wire:ignore x-data="{
                             ts: null,
                             canEdit: @js($canEdit),
-                            {{-- Lempar variabel PHP ke JS --}}
                             init() {
                                 this.ts = new TomSelect(this.$refs.selectInput, {
                                     valueField: 'id',
@@ -371,7 +373,6 @@
                                     }
                                 });
 
-                                // Set value awal jika sudah ada di database
                                 let initId = '{{ $kota_id }}';
                                 let initNama = '{{ $kota_nama }}';
                                 if (initId) {
@@ -379,7 +380,6 @@
                                     this.ts.setValue(initId, true);
                                 }
 
-                                // BAGIAN KUNCI: Jika tidak boleh edit, matikan TomSelect
                                 if (!this.canEdit) {
                                     this.ts.disable();
                                 }
@@ -528,6 +528,14 @@
                                         </path>
                                     </svg></div>
                             @endif
+                            <div x-show="isUploading"
+                                class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center backdrop-blur-sm z-10">
+                                <span class="text-white font-black text-xs mb-1" x-text="progress + '%'"></span>
+                                <div class="w-16 bg-slate-600 rounded-full h-1.5">
+                                    <div class="bg-emerald-400 h-full rounded-full transition-all"
+                                        :style="'width: ' + progress + '%'"></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="flex-1">
                             <input type="file" id="logo_upload" class="hidden" accept="image/*"
@@ -548,13 +556,13 @@
                         class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 block">Background
                         TV (Otomatis Tersimpan)</label>
                     <div
-                        class="relative w-full h-48 rounded-4xl bg-slate-100 border-2 border-dashed border-slate-300 overflow-hidden shadow-sm transition
+                        class="relative w-full h-48 rounded-[2rem] bg-slate-100 border-2 border-dashed border-slate-300 overflow-hidden shadow-sm transition
                 {{ $canEdit ? 'hover:border-emerald-400 group cursor-pointer' : 'opacity-60 cursor-not-allowed' }}">
 
                         <input type="file"
                             class="absolute inset-0 w-full h-full opacity-0 z-20 {{ $canEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}"
-                            accept="image/*" @change="handleUpload"
-                            :disabled="isUploading || !@js($canEdit)">
+                            accept="image/*" @change="handleUpload" {{ !$canEdit ? 'disabled' : '' }}
+                            x-bind:disabled="isUploading">
 
                         @if ($old_background)
                             <img src="{{ asset('storage/' . $old_background) }}"
@@ -570,6 +578,18 @@
                                     class="text-sm font-bold tracking-tight">{{ $canEdit ? 'Klik untuk Ganti Background' : 'Read Only' }}</span>
                             </div>
                         @endif
+
+                        <div x-show="isUploading"
+                            class="absolute inset-0 z-30 bg-black/70 flex flex-col items-center justify-center backdrop-blur-md">
+                            <span class="text-emerald-400 font-black text-2xl mb-2" x-text="progress + '%'"></span>
+                            <div class="w-1/2 bg-slate-700 rounded-full h-2 overflow-hidden shadow-inner">
+                                <div class="bg-emerald-500 h-full transition-all duration-200"
+                                    :style="'width: ' + progress + '%'"></div>
+                            </div>
+                            <p
+                                class="text-[10px] text-slate-300 uppercase tracking-widest mt-3 font-bold animate-pulse">
+                                Memproses & Menyimpan...</p>
+                        </div>
                     </div>
                 </div>
 
@@ -589,7 +609,7 @@
                                 class="absolute top-2 left-2 bg-rose-500 text-white text-[9px] font-black px-2 py-1 rounded-md uppercase tracking-widest z-10 flex items-center gap-1 shadow-md">
                                 <div class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div> Video Aktif
                             </div>
-                            <video
+                            <video wire:key="video-preview-{{ $old_video }}"
                                 class="w-full h-40 object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                                 controls controlsList="nodownload">
                                 <source src="{{ asset('storage/' . $old_video) }}" type="video/mp4">
@@ -605,7 +625,8 @@
 
                         <input type="file" wire:model="video"
                             class="absolute inset-0 w-full h-full opacity-0 z-20 {{ $canEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}"
-                            accept="video/mp4" :disabled="uploading || isSaving || !@js($canEdit)">
+                            accept="video/mp4" {{ !$canEdit ? 'disabled' : '' }}
+                            x-bind:disabled="uploading || isSaving">
 
                         <div class="flex flex-col items-center justify-center py-8 text-center px-4">
                             <div
@@ -619,6 +640,19 @@
                             </div>
                             <span
                                 class="text-sm font-bold text-slate-700">{{ $canEdit ? 'Upload Video Baru (Auto Save)' : 'Akses Upload Terkunci' }}</span>
+                        </div>
+
+                        <div x-show="uploading || isSaving" x-transition
+                            class="absolute inset-0 z-30 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center px-8">
+                            <span class="text-sm font-black text-emerald-600 mb-2 uppercase tracking-widest"
+                                x-text="progress === 100 ? 'Menyimpan...' : 'Upload: ' + progress + '%'"></span>
+                            <div class="w-full bg-slate-200 rounded-full h-3 mb-2 overflow-hidden shadow-inner">
+                                <div class="bg-emerald-500 h-full transition-all duration-200 flex items-center justify-end"
+                                    :class="progress === 100 ? 'animate-pulse' : ''"
+                                    :style="'width: ' + progress + '%'"></div>
+                            </div>
+                            <p class="text-[9px] text-slate-500 font-bold uppercase tracking-widest animate-pulse"
+                                x-show="progress === 100">Jangan tutup halaman...</p>
                         </div>
                     </div>
                 </div>
@@ -643,20 +677,22 @@
                         <div class="mb-4 p-3 bg-white rounded-xl border border-slate-200 flex flex-col gap-2">
                             <p class="text-[9px] font-bold text-emerald-500 uppercase tracking-widest px-1">File Aktif
                             </p>
-                            <audio controls class="h-8 w-full">
+                            <audio wire:key="audio-adzan-{{ $old_adzan }}" controls class="h-8 w-full">
                                 <source src="{{ Storage::url($old_adzan) }}" type="audio/mpeg">
                             </audio>
                         </div>
                     @endif
 
                     <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
-                        x-on:livewire-upload-finish="uploading = false">
+                        x-on:livewire-upload-finish="uploading = false"
+                        x-on:livewire-upload-progress="progress = $event.detail.progress">
                         <label
                             class="relative flex items-center justify-center w-full h-16 border-2 border-dashed rounded-xl transition-all overflow-hidden
                     {{ $canEdit ? 'border-emerald-200 bg-emerald-50/50 hover:bg-emerald-100 cursor-pointer group' : 'border-slate-200 bg-slate-100 cursor-not-allowed' }}">
                             <input type="file" wire:model="adzan" class="hidden" accept="audio/mpeg"
-                                :disabled="uploading || !@js($canEdit)" />
-                            <div class="flex items-center gap-3">
+                                {{ !$canEdit ? 'disabled' : '' }} x-bind:disabled="uploading" />
+
+                            <div class="flex items-center gap-3" x-show="!uploading">
                                 <svg class="w-5 h-5 {{ $canEdit ? 'text-emerald-500 group-hover:scale-110' : 'text-slate-300' }} transition-transform"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
@@ -666,6 +702,12 @@
                                     class="text-xs font-black uppercase tracking-widest {{ $canEdit ? 'text-emerald-700' : 'text-slate-400' }}">
                                     {{ $canEdit ? 'Ganti MP3 Adzan' : 'Akses Terkunci' }}
                                 </span>
+                            </div>
+
+                            <div x-show="uploading"
+                                class="absolute inset-0 bg-emerald-500 flex items-center justify-center">
+                                <span class="text-white font-black text-xs uppercase tracking-widest"
+                                    x-text="'Upload ' + progress + '%'"></span>
                             </div>
                         </label>
                     </div>
@@ -678,20 +720,22 @@
                         <div class="mb-4 p-3 bg-white rounded-xl border border-slate-200 flex flex-col gap-2">
                             <p class="text-[9px] font-bold text-blue-500 uppercase tracking-widest px-1">File Subuh
                                 Aktif</p>
-                            <audio controls class="h-8 w-full">
+                            <audio wire:key="audio-subuh-{{ $old_adzan_subuh }}" controls class="h-8 w-full">
                                 <source src="{{ Storage::url($old_adzan_subuh) }}" type="audio/mpeg">
                             </audio>
                         </div>
                     @endif
 
                     <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
-                        x-on:livewire-upload-finish="uploading = false">
+                        x-on:livewire-upload-finish="uploading = false"
+                        x-on:livewire-upload-progress="progress = $event.detail.progress">
                         <label
                             class="relative flex items-center justify-center w-full h-16 border-2 border-dashed rounded-xl transition-all overflow-hidden
                     {{ $canEdit ? 'border-blue-200 bg-blue-50/50 hover:bg-blue-100 cursor-pointer group' : 'border-slate-200 bg-slate-100 cursor-not-allowed' }}">
                             <input type="file" wire:model="adzan_subuh" class="hidden" accept="audio/mpeg"
-                                :disabled="uploading || !@js($canEdit)" />
-                            <div class="flex items-center gap-3">
+                                {{ !$canEdit ? 'disabled' : '' }} x-bind:disabled="uploading" />
+
+                            <div class="flex items-center gap-3" x-show="!uploading">
                                 <svg class="w-5 h-5 {{ $canEdit ? 'text-blue-500 group-hover:scale-110' : 'text-slate-300' }} transition-transform"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
@@ -701,6 +745,12 @@
                                     class="text-xs font-black uppercase tracking-widest {{ $canEdit ? 'text-blue-700' : 'text-slate-400' }}">
                                     {{ $canEdit ? 'Ganti MP3 Subuh' : 'Akses Terkunci' }}
                                 </span>
+                            </div>
+
+                            <div x-show="uploading"
+                                class="absolute inset-0 bg-blue-500 flex items-center justify-center">
+                                <span class="text-white font-black text-xs uppercase tracking-widest"
+                                    x-text="'Upload ' + progress + '%'"></span>
                             </div>
                         </label>
                     </div>

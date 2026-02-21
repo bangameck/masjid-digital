@@ -56,14 +56,14 @@ class JadwalSholat extends Component
         $this->bulan_generate = (int)date('m');
         $this->bulan_filter = (int)date('m');
 
-        // Set default awal agar view tidak error saat load
+
         $this->currentDate = Carbon::createFromDate($this->tahun_generate, $this->bulan_generate, 1)->format('Y-m-d');
     }
 
     // --- FUNGSI EDIT INLINE HIJRIAH ---
     public function editHijriah($id, $currentText)
     {
-        if (!$this->canEdit) return; // Proteksi Backend
+        if (!$this->canEdit) return;
 
         $this->editingId = $id;
         $this->hijriahText = $currentText;
@@ -71,7 +71,7 @@ class JadwalSholat extends Component
 
     public function saveHijriah()
     {
-        if (!$this->canEdit) return; // Proteksi Backend
+        if (!$this->canEdit) return;
 
         $this->validate([
             'hijriahText' => 'required|string|max:255'
@@ -96,11 +96,10 @@ class JadwalSholat extends Component
         $this->editingId = null;
         $this->hijriahText = '';
     }
-    // -----------------------------------
 
     public function startGenerate()
     {
-        if (!$this->canEdit) return; // Proteksi Backend
+        if (!$this->canEdit) return;
 
         $this->isGenerating = true;
         $this->progress = 0;
@@ -121,7 +120,7 @@ class JadwalSholat extends Component
 
     public function generateNextDay()
     {
-        if (!$this->canEdit) return; // Proteksi Backend
+        if (!$this->canEdit) return;
 
         $setting = AppSetting::first();
         $kotaId = $setting->kota_id ?? 'c7e1249ffc03eb9ded908c236bd1996d'; // Default Pekanbaru
@@ -166,7 +165,7 @@ class JadwalSholat extends Component
             $this->apiStatusHijri = 'Error Koneksi ⚠';
         }
 
-        // Simpan Data jika keduanya ada
+
         if ($resJadwalData) {
             $hijriText = $resHijriData ? ($resHijriData['today'] ?? $resHijriData['hijr']['today']) : 'Tidak tersedia';
 

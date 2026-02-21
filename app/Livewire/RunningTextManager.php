@@ -12,7 +12,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\RunningText; // Pastikan model ini sudah ada
+use App\Models\RunningText;
 use Livewire\WithPagination;
 use App\Models\AppSetting;
 use Livewire\Attributes\Layout;
@@ -45,7 +45,7 @@ class RunningTextManager extends Component
         $data = RunningText::orderBy('urutan', 'asc')->latest()->paginate(10);
 
         // Ambil Global Speed dari AppSetting
-        // Pastikan ada default value (misal 5) jika tabel kosong
+        // Default value (misal 5) jika tabel kosong
         $setting = AppSetting::first();
         $globalSpeed = $setting->running_text_speed ?? 5;
 

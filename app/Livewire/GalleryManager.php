@@ -105,7 +105,7 @@ class GalleryManager extends Component
 
     public function savePhoto()
     {
-        if (!$this->canEdit) return; // GEMBOK BACKEND
+        if (!$this->canEdit) return;
 
         $this->validate(['photo' => 'image|max:10240']);
 
@@ -148,7 +148,7 @@ class GalleryManager extends Component
 
     public function deletePhotoAction()
     {
-        if (!$this->canEdit) return; // GEMBOK BACKEND
+        if (!$this->canEdit) return;
 
         if ($this->photoToDeleteId) {
             $p = Photo::find($this->photoToDeleteId);
@@ -179,7 +179,7 @@ class GalleryManager extends Component
 
     public function updateCaption($id, $caption)
     {
-        if (!$this->canEdit) return; // GEMBOK BACKEND
+        if (!$this->canEdit) return;
         Photo::find($id)->update(['caption' => $caption]);
         $this->dispatch('refresh-lightbox', data: $this->getLightboxData());
     }

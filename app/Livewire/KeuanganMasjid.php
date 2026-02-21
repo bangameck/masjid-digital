@@ -157,7 +157,7 @@ class KeuanganMasjid extends Component
 
         $transaksi = $query->orderBy($this->sortColumn, $this->sortDirection)->paginate(10);
 
-        // Ringkasan Statistik
+        // 2. Ringkasan Statistik
         $statsSaldoQuery = Keuangan::query();
         if (!empty($this->sub_kategori_filter)) {
             $statsQuery->where('sub_kategori', $this->sub_kategori_filter);
@@ -234,8 +234,6 @@ class KeuanganMasjid extends Component
             'expense' => $expenseData
         ];
     }
-
-    // ... [BAGIAN CRUD REKENING & TRANSAKSI SAMA PERSIS DENGAN SEBELUMNYA] ...
 
     public function saveRekening()
     {

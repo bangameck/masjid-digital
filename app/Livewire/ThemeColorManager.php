@@ -39,7 +39,7 @@ class ThemeColorManager extends Component
 
     public function mount()
     {
-        // Gembok Akses CRUD
+        // RBAC CRUD
         $this->canEdit = in_array(Auth::user()->role, ['superadmin', 'operator', 'humas']);
         $this->resetInput();
     }
@@ -63,7 +63,7 @@ class ThemeColorManager extends Component
 
     public function store()
     {
-        if (!$this->canEdit) return; // Gembok
+        if (!$this->canEdit) return;
 
         $this->validate(array_merge($this->rules, [
             'name' => 'required|alpha_dash|unique:theme_colors,name'
@@ -83,7 +83,7 @@ class ThemeColorManager extends Component
 
     public function edit($id)
     {
-        if (!$this->canEdit) return; // Gembok
+        if (!$this->canEdit) return;
 
         $color = ThemeColor::findOrFail($id);
         $this->selectedId = $id;
@@ -97,7 +97,7 @@ class ThemeColorManager extends Component
 
     public function update()
     {
-        if (!$this->canEdit) return; // Gembok
+        if (!$this->canEdit) return;
 
         $this->validate(array_merge($this->rules, [
             'name' => 'required|alpha_dash|unique:theme_colors,name,' . $this->selectedId
@@ -118,7 +118,7 @@ class ThemeColorManager extends Component
 
     public function deleteId($id)
     {
-        if (!$this->canEdit) return; // Gembok
+        if (!$this->canEdit) return;
 
         $this->selectedId = $id;
         $this->isDeleteModalOpen = true;
@@ -126,7 +126,7 @@ class ThemeColorManager extends Component
 
     public function delete()
     {
-        if (!$this->canEdit) return; // Gembok
+        if (!$this->canEdit) return; 
 
         ThemeColor::find($this->selectedId)->delete();
         $this->isDeleteModalOpen = false;

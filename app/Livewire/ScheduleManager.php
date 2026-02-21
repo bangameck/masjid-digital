@@ -18,7 +18,7 @@ use App\Models\PetugasJumat;
 use App\Models\PetugasRamadhan;
 use App\Models\PetugasIed;
 use App\Models\PengajianRutin;
-use App\Models\JadwalSholat; // Digunakan untuk filter tanggal Ramadhan
+use App\Models\JadwalSholat;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Auth;

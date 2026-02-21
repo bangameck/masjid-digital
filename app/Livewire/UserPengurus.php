@@ -91,7 +91,7 @@ class UserPengurus extends Component
 
     public function create()
     {
-        if (!$this->canEdit) return; // Proteksi Gembok
+        if (!$this->canEdit) return;
 
         $this->resetInput();
         $this->isEditMode = false;
@@ -135,7 +135,7 @@ class UserPengurus extends Component
 
     public function store()
     {
-        if (!$this->canEdit) return; // Proteksi Gembok
+        if (!$this->canEdit) return;
 
         $rules = [
             'email' => 'required|email|unique:users,email',
@@ -149,7 +149,6 @@ class UserPengurus extends Component
             $rules['nama_pengurus'] = 'required';
             $rules['jabatan'] = 'required';
             $rules['foto'] = 'nullable|image|max:2048';
-            // Validasi 'role' dihapus karena akan digenerate otomatis dari jabatan
         }
 
         $this->validate($rules, $this->messages(), $this->validationAttributes());
@@ -169,7 +168,7 @@ class UserPengurus extends Component
                     'no_hp' => $this->no_hp, 'foto_path' => $path, 'is_active' => $this->is_active,
                 ]);
 
-                // LOGIKA BARU: Role otomatis mengambil dari Jabatan dan dijadikan huruf kecil
+                // Role otomatis mengambil dari Jabatan dan dijadikan huruf kecil
                 $generatedRole = strtolower($this->jabatan);
 
                 User::create([
@@ -219,7 +218,7 @@ class UserPengurus extends Component
 
     public function update()
     {
-        if (!$this->canEdit) return; // Proteksi Gembok
+        if (!$this->canEdit) return;
 
         $userIdToCheck = $this->activeTab == 'users'
             ? $this->selectedId
@@ -265,7 +264,7 @@ class UserPengurus extends Component
                     'no_hp' => $this->no_hp, 'foto_path' => $path, 'is_active' => $this->is_active,
                 ]);
 
-                // LOGIKA BARU: Update Role juga jika jabatan diubah
+                // Update Role jika jabatan diubah
                 $generatedRole = strtolower($this->jabatan);
 
                 if ($pengurus->user) {
@@ -290,7 +289,7 @@ class UserPengurus extends Component
     }
 
     public function deleteId($id) {
-        if (!$this->canEdit) return; // Proteksi Gembok
+        if (!$this->canEdit) return;
         if ($this->activeTab == 'users' && Auth::user()->role !== 'superadmin') abort(403);
 
         $this->selectedId = $id;
@@ -299,7 +298,7 @@ class UserPengurus extends Component
 
     public function delete()
     {
-        if (!$this->canEdit) return; // Proteksi Gembok
+        if (!$this->canEdit) return;
 
         DB::beginTransaction();
         try {
@@ -323,7 +322,7 @@ class UserPengurus extends Component
     }
 
     public function toggleStatus($id) {
-        if (!$this->canEdit) return; // Proteksi Gembok
+        if (!$this->canEdit) return;
         $p = Pengurus::find($id); $p->is_active = !$p->is_active; $p->save();
     }
 }

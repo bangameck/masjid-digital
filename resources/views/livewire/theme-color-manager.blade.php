@@ -7,7 +7,6 @@
         }
     </style>
 
-    {{-- HEADER --}}
     <div class="bg-white rounded-[3.5rem] border border-slate-100 shadow-xl p-8 md:p-12 relative overflow-hidden">
         <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-50 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
         <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
@@ -38,10 +37,8 @@
         </div>
     @endif
 
-    {{-- KONTEN UTAMA --}}
     <div class="grid grid-cols-1 {{ $canEdit ? 'lg:grid-cols-3' : 'lg:grid-cols-1' }} gap-8">
 
-        {{-- FORM INPUT (Hanya tampil jika canEdit true) --}}
         @if($canEdit)
         <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl h-fit relative overflow-hidden lg:col-span-1">
             <div class="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-emerald-500 to-emerald-300"></div>
@@ -90,7 +87,7 @@
         </div>
         @endif
 
-        {{-- DAFTAR TEMA --}}
+
         <div class="{{ $canEdit ? 'lg:col-span-2' : 'w-full' }}">
             <div class="grid grid-cols-1 md:grid-cols-2 {{ !$canEdit ? 'lg:grid-cols-3' : '' }} gap-6">
                 @forelse($colors as $color)
@@ -127,7 +124,7 @@
         </div>
     </div>
 
-    {{-- MODAL HAPUS --}}
+
     @if($isDeleteModalOpen && $canEdit)
     <div class="fixed inset-0 z-9999 flex items-center justify-center bg-rose-900/90 backdrop-blur-sm p-4 animate-fade-in">
         <div class="bg-white rounded-[3rem] p-10 w-full max-w-md text-center shadow-2xl relative overflow-hidden">

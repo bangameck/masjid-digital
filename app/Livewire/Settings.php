@@ -26,7 +26,7 @@ class Settings extends Component
 {
     use WithFileUploads;
 
-    public $tipe_tempat; // [BARU] Masjid / Mushola
+    public $tipe_tempat; // Masjid / Mushola
     public $nama_masjid, $alamat, $zona_waktu;
     public $latitude, $longitude;
     public $running_text_speed, $durasi_slide_foto;
@@ -36,7 +36,7 @@ class Settings extends Component
     public $old_logo, $old_background;
 
     public $adzan, $old_adzan;
-    public $adzan_subuh, $old_adzan_subuh; // [BARU] Adzan Subuh
+    public $adzan_subuh, $old_adzan_subuh; // Adzan Subuh
 
     public $video, $old_video;
     public $isVideoSaving = false;

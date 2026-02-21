@@ -35,7 +35,7 @@ class BannerManager extends Component
     public $photo; // Untuk upload temporary
     public $existingImage; // Untuk preview saat edit
 
-    // Variabel Pembatas Hak Akses
+    // Variabel Pembatas Hak Akses (RBAC)
     public $canEdit = false;
 
     public function mount()
@@ -53,7 +53,7 @@ class BannerManager extends Component
 
     public function create()
     {
-        if (!$this->canEdit) return; // Gembok
+        if (!$this->canEdit) return;
 
         $this->resetInput();
         $this->isEditMode = false;
@@ -62,7 +62,7 @@ class BannerManager extends Component
 
     public function store()
     {
-        if (!$this->canEdit) return; // Gembok
+        if (!$this->canEdit) return;
 
         $this->validate([
             'photo' => 'required|image|max:10240',
@@ -85,7 +85,7 @@ class BannerManager extends Component
 
     public function edit($id)
     {
-        if (!$this->canEdit) return; // Gembok
+        if (!$this->canEdit) return;
 
         $b = Banner::find($id);
         $this->selectedId = $id;
@@ -101,7 +101,7 @@ class BannerManager extends Component
 
     public function update()
     {
-        if (!$this->canEdit) return; // Gembok
+        if (!$this->canEdit) return;
 
         $this->validate([
             'judul' => 'nullable|min:3',
@@ -130,7 +130,7 @@ class BannerManager extends Component
 
     public function deleteId($id)
     {
-        if (!$this->canEdit) return; // Gembok
+        if (!$this->canEdit) return;
 
         $this->selectedId = $id;
         $this->isDeleteModalOpen = true;
@@ -138,7 +138,7 @@ class BannerManager extends Component
 
     public function delete()
     {
-        if (!$this->canEdit) return; // Gembok
+        if (!$this->canEdit) return; 
 
         $b = Banner::find($this->selectedId);
         if (Storage::disk('public')->exists($b->image_path)) {

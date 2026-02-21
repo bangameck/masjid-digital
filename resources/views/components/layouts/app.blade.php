@@ -158,7 +158,6 @@
                         class="fixed bottom-0 right-0 left-0 lg:left-72 bg-white/80 backdrop-blur-md border-t border-slate-100 z-30 px-8 py-4">
                         <div class="flex flex-col md:flex-row justify-between items-center gap-2">
                             <p class="text-xs font-medium text-slate-500">
-                                {{-- Sekalian saya tambahkan logic Versi yang kita bahas sebelumnya ya --}}
                                 &copy; {{ date('Y') }} | Masjid Digital v{{ env('APP_VERSION', '1.0.0') }}
                             </p>
                             <p class="text-xs font-medium text-slate-500">

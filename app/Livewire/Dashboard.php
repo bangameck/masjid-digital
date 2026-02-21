@@ -17,7 +17,7 @@ use App\Models\Keuangan;
 use App\Models\JadwalSholat;
 use App\Models\AppSetting;
 use App\Models\RunningText;
-use App\Models\Pengurus; // Tambahkan ini!
+use App\Models\Pengurus;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 

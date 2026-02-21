@@ -411,7 +411,7 @@
                             let width = img.width;
                             let height = img.height;
 
-                            // Kita turunkan Max Size sedikit supaya lebih gampang capai target < 100Kb
+                            // Turunkan Max Size untuk capai target < 100Kb
                             const maxSize = 1200;
                             if (width > height) {
                                 if (width > maxSize) { height *= maxSize / width; width = maxSize; }

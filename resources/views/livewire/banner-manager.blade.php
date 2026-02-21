@@ -239,7 +239,7 @@
 <script>
     function bannerManager() {
         return {
-            // Logic Javascript tambahan jika diperlukan di masa depan
+            // Logic Javascript tambahan jika diperlukan kedepannya
         }
     }
 </script>
