@@ -136,7 +136,7 @@ Sistem tab rapi untuk mengelola berbagai agenda dakwah:
 🔗 https://masjid.radevankaproject.web.id
 
 ```bash
-   username : guest@masjid.com
+   username : tamu@masjid.com
    password : masjid123
 ```
 > 💡 **Catatan Penting:** Untuk pengalaman pengguna yang maksimal dan kelancaran fungsi antarmuka, **sangat disarankan untuk mengelola aplikasi ini menggunakan perangkat Desktop (PC/Laptop)**.
