@@ -158,7 +158,7 @@ Sistem tab rapi untuk mengelola berbagai agenda dakwah:
 
 ## 🌐 Link Test / Demo ##
 
-🔗 https://masjid.radevankaproject.web.id
+🔗 https://demo-masjid.radevankaproject.web.id
 
 ```bash
    username : tamu@masjid.com
