@@ -115,7 +115,7 @@
     </style>
 
     <div x-show="!started"
-        class="absolute inset-0 z-100 bg-slate-950 flex flex-col items-center justify-center backdrop-blur-3xl">
+        class="absolute inset-0 z-[100] bg-slate-950 flex flex-col items-center justify-center backdrop-blur-3xl">
         <div class="text-center">
             <svg class="w-32 h-32 text-theme-main mx-auto mb-6 animate-pulse" fill="none" stroke="currentColor"
                 viewBox="0 0 24 24">
@@ -159,7 +159,7 @@
                 <p class="text-sm font-medium text-slate-300 mt-1 mb-2 opacity-90 line-clamp-1">
                     {{ $settings->alamat ?? 'Alamat tempat belum dikonfigurasi' }}
                 </p>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-3">
                     <span class="text-xs font-bold text-theme-light tracking-widest uppercase flex items-center gap-1">
                         <svg class="w-4 h-4 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -170,23 +170,10 @@
                         </svg>
                         {{ $settings->kota_nama ?? 'Pekanbaru' }}
                     </span>
-
                     <span class="text-slate-600">•</span>
-
                     <span
                         class="text-[9px] font-black text-slate-400 uppercase tracking-widest bg-white/5 px-2 py-0.5 rounded border border-white/10">
                         {{ $tipeTempat }} Mode
-                    </span>
-
-                    <span class="text-slate-600">•</span>
-
-                    <span
-                        class="text-[9px] font-black text-emerald-500 uppercase tracking-widest bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 flex items-center gap-1">
-                        <svg class="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z" />
-                        </svg>
-                        {{ $apiHost }}
                     </span>
                 </div>
             </div>
@@ -206,7 +193,7 @@
         <div class="w-full h-full flex gap-6 md:gap-8">
 
             <div
-                class="flex-[2.5] relative rounded-4xl md:rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 bg-black flex flex-col justify-end">
+                class="flex-[2.5] relative rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 bg-black flex flex-col justify-end">
 
                 <div class="absolute inset-0 z-0">
                     @if ($banners->count() > 0)
@@ -220,14 +207,14 @@
                 </div>
 
                 <div
-                    class="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent z-10 pointer-events-none">
+                    class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10 pointer-events-none">
                 </div>
 
-                <div class="relative w-full md:max-w-full p-6 flex flex-col gap-4 z-20 items-start">
+                <div class="relative w-full md:max-w-[100%] p-6 flex flex-col gap-4 z-20 items-start">
 
                     @if ($contents->count() > 0)
                         <div
-                            class="bg-slate-950/50 backdrop-blur-md rounded-3xl p-4 md:p-5 border border-white/10 shadow-2xl relative w-full overflow-hidden ring-1 ring-white/5">
+                            class="bg-slate-950/50 backdrop-blur-md rounded-[1.5rem] p-4 md:p-5 border border-white/10 shadow-2xl relative w-full overflow-hidden ring-1 ring-white/5">
                             <div class="absolute inset-0 opacity-[0.03] islamic-pattern pointer-events-none"></div>
 
                             <div class="flex items-center gap-2 mb-3 relative z-10">
@@ -287,7 +274,7 @@
                                         @endif
 
                                         <div
-                                            class="border-l-2 {{ $borderStyle }} pl-3 bg-linear-to-r from-black/40 to-transparent py-2 rounded-r-lg">
+                                            class="border-l-2 {{ $borderStyle }} pl-3 bg-gradient-to-r from-black/40 to-transparent py-2 rounded-r-lg">
 
                                             <p
                                                 class="text-slate-300 text-xs md:text-sm italic font-medium leading-relaxed">
@@ -310,7 +297,7 @@
 
                     @if ($ceramah->count() > 0)
                         <div
-                            class="bg-black/60 backdrop-blur-xl rounded-3xl md:rounded-[1.2rem] border border-white/20 shadow-xl relative overflow-hidden w-full h-17.5 md:h-20 flex items-center px-4 ring-1 ring-white/5">
+                            class="bg-black/60 backdrop-blur-xl rounded-[1rem] md:rounded-[1.2rem] border border-white/20 shadow-xl relative overflow-hidden w-full h-[70px] md:h-[80px] flex items-center px-4 ring-1 ring-white/5">
                             <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-theme-main shadow-theme-glow"></div>
 
                             <div class="relative w-full flex items-center h-full">
@@ -376,7 +363,7 @@
                                         <div class="w-[30%] flex flex-col gap-1 items-end justify-center pl-4">
                                             @if ($kajian->imam)
                                                 <div
-                                                    class="text-[9px] bg-white/5 px-2 py-0.5 rounded border border-white/10 flex justify-between w-full max-w-37.5">
+                                                    class="text-[9px] bg-white/5 px-2 py-0.5 rounded border border-white/10 flex justify-between w-full max-w-[150px]">
                                                     <span class="text-slate-400 font-bold uppercase">Imam</span>
                                                     <span
                                                         class="text-white font-semibold truncate">{{ $kajian->imam }}</span>
@@ -384,7 +371,7 @@
                                             @endif
                                             @if ($kajian->muadzin)
                                                 <div
-                                                    class="text-[9px] bg-white/5 px-2 py-0.5 rounded border border-white/10 flex justify-between w-full max-w-37.5">
+                                                    class="text-[9px] bg-white/5 px-2 py-0.5 rounded border border-white/10 flex justify-between w-full max-w-[150px]">
                                                     <span class="text-slate-400 font-bold uppercase">Muadz</span>
                                                     <span
                                                         class="text-white font-semibold truncate">{{ $kajian->muadzin }}</span>
@@ -399,42 +386,41 @@
                 </div>
             </div>
 
-            <div class="w-full max-w-90 md:max-w-full flex flex-col gap-4 h-full">
+            <div class="w-full max-w-[360px] md:max-w-[400px] flex flex-col gap-4 h-full">
                 <div class="flex-1 flex flex-col gap-2 min-h-0">
-                    @php $waktuSholat = ['Subuh', 'Terbit', 'Dhuha', 'Dzuhur', 'Ashar', 'Maghrib', 'Isya']; @endphp
-                    @foreach ($waktuSholat as $waktu)
-                        @php
-                            $field = strtolower($waktu);
-                            $jamFormatted = \Carbon\Carbon::parse($jadwal->$field ?? '00:00:00')->format('H:i');
-                            $isSunnah = in_array($waktu, ['Terbit', 'Dhuha']);
-                        @endphp
+    @php $waktuSholat = ['Imsak', 'Subuh', 'Dzuhur', 'Ashar', 'Maghrib', 'Isya']; @endphp
+    @foreach ($waktuSholat as $waktu)
+        @php
+            $field = strtolower($waktu);
+            $jamFormatted = \Carbon\Carbon::parse($jadwal->$field ?? '00:00:00')->format('H:i');
+            $isSunnah = in_array($waktu, ['Imsak']);
+        @endphp
 
-                        <div class="flex-1 relative overflow-hidden rounded-[1.2rem] px-5 flex justify-between items-center border transition-all duration-500"
-                            :class="nextPrayerName === '{{ $waktu }}' ?
-                                'bg-theme-main border-theme-main scale-105 shadow-theme-glow z-10' :
-                                'bg-black/50 backdrop-blur-md {{ $isSunnah ? 'border-amber-500/20 bg-amber-950/20' : 'border-white/10' }}'">
+        <div class="flex-1 relative overflow-hidden rounded-[1.2rem] px-5 flex justify-between items-center border transition-all duration-500"
+            :class="nextPrayerName === '{{ $waktu }}' ?
+                'bg-theme-main border-theme-main scale-105 shadow-theme-glow z-10' :
+                'bg-black/50 backdrop-blur-md {{ $isSunnah ? 'border-amber-500/20 bg-amber-950/20' : 'border-white/10' }}'">
 
-                            <span class="text-lg font-bold uppercase tracking-widest"
-                                :class="nextPrayerName === '{{ $waktu }}' ? 'text-white' :
-                                    '{{ $isSunnah ? 'text-amber-600' : 'text-slate-400' }}'">{{ $waktu }}</span>
+            <span class="text-lg font-bold uppercase tracking-widest"
+                :class="nextPrayerName === '{{ $waktu }}' ? 'text-white' :
+                    '{{ $isSunnah ? 'text-amber-600' : 'text-slate-400' }}'">{{ $waktu }}</span>
 
-                            <span class="text-3xl font-black tracking-tighter tabular-nums"
-                                :class="nextPrayerName === '{{ $waktu }}' ? 'text-white' :
-                                    '{{ $isSunnah ? 'text-amber-400' : 'text-theme-main' }}'">{{ $jamFormatted }}</span>
+            <span class="text-3xl font-black tracking-tighter tabular-nums"
+                :class="nextPrayerName === '{{ $waktu }}' ? 'text-white' :
+                    '{{ $isSunnah ? 'text-amber-400' : 'text-theme-main' }}'">{{ $jamFormatted }}</span>
 
-                            <div x-show="nextPrayerName === '{{ $waktu }}'"
-                                class="absolute -bottom-4 -right-4 text-7xl text-white opacity-20 rotate-12">
-                                <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" />
-                                </svg>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+            <div x-show="nextPrayerName === '{{ $waktu }}'"
+                class="absolute -bottom-4 -right-4 text-7xl text-white opacity-20 rotate-12">
+                <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/>
+                </svg>
+            </div>
+        </div>
+    @endforeach
+</div>
 
                 <div
-                    class="bg-theme-dark rounded-3xl p-5 border border-theme-main/50 shadow-[0_0_40px_rgba(0,0,0,0.8)] shrink-0 relative overflow-hidden h-30 flex items-center justify-center group ring-1 ring-white/10">
+                    class="bg-theme-dark rounded-[1.5rem] p-5 border border-theme-main/50 shadow-[0_0_40px_rgba(0,0,0,0.8)] shrink-0 relative overflow-hidden h-[120px] flex items-center justify-center group ring-1 ring-white/10">
                     <div
                         class="absolute -right-4 -top-4 text-white/5 w-32 h-32 rotate-12 transition-transform duration-1000 group-hover:rotate-45 pointer-events-none">
                         <svg fill="currentColor" viewBox="0 0 24 24">
@@ -511,7 +497,7 @@
                                             class="px-2 py-0.5 bg-white/5 rounded-md text-[8px] font-bold text-slate-400 uppercase tracking-tighter border border-white/10">Atas
                                             Nama</span>
                                         <p
-                                            class="text-[10px] text-white uppercase font-black tracking-wider truncate max-w-45">
+                                            class="text-[10px] text-white uppercase font-black tracking-wider truncate max-w-[180px]">
                                             {{ $rek->nama_akun }}
                                         </p>
                                     </div>
@@ -534,7 +520,7 @@
     </div>
 
     <div x-show="mode === 'waiting_iqomah'" style="display: none;"
-        class="fixed inset-0 z-100 flex flex-col items-center justify-center bg-black/95 backdrop-blur-3xl">
+        class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/95 backdrop-blur-3xl">
         <h2 class="text-[4rem] font-bold text-slate-400 uppercase tracking-[0.5em] mb-6 animate-pulse">Waktu <span
                 x-text="currentPrayerName" class="text-white"></span> Telah Masuk</h2>
         <p class="text-4xl text-theme-main mb-8 tracking-widest uppercase font-black">Iqomah Dalam:</p>
@@ -543,10 +529,10 @@
     </div>
 
     <div x-show="mode === 'sholat'" style="display: none;"
-        class="fixed inset-0 z-100 flex flex-col items-center justify-center bg-black w-full h-full">
+        class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black w-full h-full">
         <div class="relative w-96 h-96 mb-16 animate-pulse">
             <div
-                class="absolute inset-0 border-12px border-rose-600 rounded-full shadow-[0_0_100px_rgba(225,29,72,0.5)]">
+                class="absolute inset-0 border-[12px] border-rose-600 rounded-full shadow-[0_0_100px_rgba(225,29,72,0.5)]">
             </div>
             <div class="absolute inset-0 flex items-center justify-center"><svg class="w-48 h-48 text-rose-600"
                     fill="currentColor" viewBox="0 0 24 24">
@@ -580,7 +566,7 @@
             class="h-20 bg-black/60 backdrop-blur-2xl border border-white/20 rounded-[2.5rem] flex items-center overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.6)] ring-1 ring-white/10">
             <div
                 class="bg-theme-main h-full flex items-center px-10 z-30 shadow-[10px_0_30px_rgba(0,0,0,0.8)] border-r border-white/20 relative">
-                <span class="text-black font-black uppercase tracking-widest text-2xl relative z-10">Informasi</span>
+                <span class="text-black font-black uppercase tracking-[0.1em] text-2xl relative z-10">Informasi</span>
             </div>
             <div class="marquee-preview flex-1">
                 <div class="marquee-content font-black text-4xl uppercase tracking-[0.05em]"

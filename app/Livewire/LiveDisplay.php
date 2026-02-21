@@ -40,7 +40,7 @@ class LiveDisplay extends Component
         // 1. DATA JADWAL & KOREKSI WAKTU DINAMIS
         $jadwal = JadwalSholat::where('tanggal', $today)->first();
         if ($jadwal && $settings) {
-            $waktuSholat = ['subuh', 'terbit', 'dhuha', 'dzuhur', 'ashar', 'maghrib', 'isya'];
+            $waktuSholat = ['imsak','subuh', 'dhuha', 'dzuhur', 'ashar', 'maghrib', 'isya'];
             foreach ($waktuSholat as $waktu) {
                 $koreksiField = 'koreksi_' . $waktu;
                 $koreksi = (int) ($settings->$koreksiField ?? 0);
