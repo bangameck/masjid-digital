@@ -101,7 +101,26 @@ Sistem tab rapi untuk mengelola berbagai agenda dakwah:
     ```bash
     composer install
     npm install
+    npm run build
     ```
+
+    > **Tips Keamanan & Troubleshooting:**
+    >
+    > Jika Anda menemui pesan error **EBADPLATFORM** saat menjalankan `npm install` seperti ini:
+    > ```text
+    > npm error code EBADPLATFORM
+    > npm error notsup Unsupported platform for lightningcss-win32-x64-msvc...
+    > npm error notsup Valid os: win32
+    > npm error notsup Actual os: linux
+    > ```
+    > Hal ini terjadi karena perbedaan environment (Aplikasi dikembangkan di **Windows** dan di-deploy ke **Linux**).
+    > 
+    > **Solusinya:**
+    > Gunakan perintah `--force` untuk memaksa instalasi paket yang sesuai dengan OS server:
+    > ```bash
+    > npm install --force
+    > npm run build
+    > ```
 
 3. **Konfigurasi Environment**
    <br>Salin file .env.example menjadi .env lalu sesuaikan konfigurasi database dan variabel sistem.
