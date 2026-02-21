@@ -1,6 +1,7 @@
 *.log
 .DS_Store
 .env
+.env.for-masjid
 .env.backup
 .env.production
 .phpactor.json
