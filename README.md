@@ -148,6 +148,12 @@ Sistem tab rapi untuk mengelola berbagai agenda dakwah:
     php artisan serve
     ```
 
+7. **Akun Login**
+    ```bash
+    username: admin@masjid.com
+    password: password
+    ```
+
 ---
 
 ## 🌐 Link Test / Demo ##
