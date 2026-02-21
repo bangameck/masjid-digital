@@ -78,7 +78,7 @@ Sistem tab rapi untuk mengelola berbagai agenda dakwah:
 ### 📺 Pengaturan Live Display
 | Manajemen Banner | Jadwal Sholat |
 | :---: | :---: |
-| <img src="public/assets/screenshot/banner.png" alt="Banner"> | <img src="public/assets/screenshot/jadwal_sholat.png" alt="Jadwal Sholat"> |
+| <img src="public/assets/screenshot/banner.png" alt="Banner"> | <img src="public/assets/screenshot/jadwa_sholat.png" alt="Jadwal Sholat"> |
 | **Generate Jadwal Sholat** | **Doa & Hadist** |
 | <img src="public/assets/screenshot/generate_jadwal_sholat.png" alt="Generate Jadwal"> | <img src="public/assets/screenshot/doa_hadis.png" alt="Doa Hadis"> |
 | **Running Text** | **Galeri TV** |
