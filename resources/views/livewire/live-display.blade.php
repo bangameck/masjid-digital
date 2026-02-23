@@ -16,8 +16,6 @@
     @endphp
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap');
-
         :root {
             --theme-main: {{ $theme['main'] }};
             --theme-dark: {{ $theme['dark'] }};
@@ -57,7 +55,7 @@
         }
 
         .font-arab {
-            font-family: 'Amiri Quran', serif;
+            font-family: 'Amiri Quran', serif !important;
             font-weight: 400;
         }
 
@@ -192,7 +190,8 @@
         x-show="mode === 'standby'">
         <div class="w-full h-full flex gap-6 md:gap-8">
 
-            <div class="w-[75%] shrink-0 relative rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 bg-black flex flex-col justify-end">
+            <div
+                class="w-[75%] shrink-0 relative rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 bg-black flex flex-col justify-end">
 
                 <div class="absolute inset-0 z-0">
                     @if ($banners->count() > 0)

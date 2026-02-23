@@ -3,7 +3,7 @@
     @alert-error.window="showToast = true; toastMessage = $event.detail.message; setTimeout(() => showToast = false, 3000)">
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100..900&display=swap');
+        /* @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100..900&display=swap'); */
         .work-sans-all, .work-sans-all * { font-family: 'Work Sans', sans-serif !important; }
         .floating-input:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
             transform: translateY(-1.25rem) scale(0.8); background-color: white; padding-left: 4px; padding-right: 4px; color: #10b981; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;

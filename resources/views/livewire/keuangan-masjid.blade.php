@@ -1,6 +1,6 @@
 <div class="space-y-8 md:space-y-8 pb-10 work-sans-all relative">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100..900&display=swap');
+        /* @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100..900&display=swap'); */
 
         .work-sans-all,
         .work-sans-all * {
@@ -75,9 +75,9 @@
         }
     </style>
 
-    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link href="{{ asset('assets/css/tom-select/tom-select.css') }}" rel="stylesheet">
+    <script src="{{ asset('assets/js/tom-select/tom-select.complete.min.js') }}"></script>
+    <script src="{{ asset('assets/js/apexcharts/3.41.0/apexcharts.min.js') }}"></script>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div
@@ -219,15 +219,14 @@
                         <option value="rentang">Rentang Waktu</option>
                     </select>
 
-                    @if($filter_mode == 'rentang')
+                    @if ($filter_mode == 'rentang')
                         <div class="flex items-center gap-1 bg-slate-50 rounded-xl px-2 border border-slate-100">
                             <input type="date" wire:model.live="start_date"
                                 class="bg-transparent border-none text-xs font-bold text-slate-700 py-2 focus:ring-0 w-[110px]">
 
                             <span class="text-slate-400 text-xs font-bold">-</span>
 
-                            <input type="date" wire:model.live="end_date"
-                                min="{{ $start_date }}"
+                            <input type="date" wire:model.live="end_date" min="{{ $start_date }}"
                                 max="{{ \Carbon\Carbon::parse($start_date)->addDays(31)->format('Y-m-d') }}"
                                 class="bg-transparent border-none text-xs font-bold text-slate-700 py-2 focus:ring-0 w-[110px]">
                         </div>
@@ -255,8 +254,8 @@
         @if ($canEdit)
             <div class="bg-emerald-500 p-8 rounded-[2.5rem] shadow-xl shadow-emerald-200 flex flex-col justify-center items-center text-center text-white relative overflow-hidden group cursor-pointer"
                 wire:click="create">
-                <div
-                    class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 group-hover:opacity-20 transition-all">
+                <div class="absolute inset-0 opacity-10"
+                    style="background-image: url('{{ asset('assets/images/patterns/arabesque.png') }}'); background-repeat: repeat;">
                 </div>
                 <div class="relative z-10 space-y-6">
                     <div
@@ -494,62 +493,83 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left">
                 <thead>
-                    <tr class="text-slate-400 text-[9px] uppercase tracking-[0.2em] font-black border-b border-slate-50 select-none">
-                        <th class="px-8 py-6 cursor-pointer group hover:text-emerald-500 transition-colors" wire:click="sortBy('tanggal')">
+                    <tr
+                        class="text-slate-400 text-[9px] uppercase tracking-[0.2em] font-black border-b border-slate-50 select-none">
+                        <th class="px-8 py-6 cursor-pointer group hover:text-emerald-500 transition-colors"
+                            wire:click="sortBy('tanggal')">
                             <div class="flex items-center gap-2">
                                 Tanggal
-                                <svg class="w-3 h-3 {{ $sortColumn == 'tanggal' ? 'text-emerald-500' : 'text-slate-200 group-hover:text-emerald-300 transition-colors' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    @if($sortColumn == 'tanggal' && $sortDirection == 'asc')
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path>
+                                <svg class="w-3 h-3 {{ $sortColumn == 'tanggal' ? 'text-emerald-500' : 'text-slate-200 group-hover:text-emerald-300 transition-colors' }}"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    @if ($sortColumn == 'tanggal' && $sortDirection == 'asc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M5 15l7-7 7 7"></path>
                                     @elseif($sortColumn == 'tanggal' && $sortDirection == 'desc')
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M19 9l-7 7-7-7"></path>
                                     @else
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
                                     @endif
                                 </svg>
                             </div>
                         </th>
 
-                        <th class="px-6 py-6 cursor-pointer group hover:text-emerald-500 transition-colors" wire:click="sortBy('sumber_atau_tujuan')">
+                        <th class="px-6 py-6 cursor-pointer group hover:text-emerald-500 transition-colors"
+                            wire:click="sortBy('sumber_atau_tujuan')">
                             <div class="flex items-center gap-2">
                                 Keterangan / Sumber
-                                <svg class="w-3 h-3 {{ $sortColumn == 'sumber_atau_tujuan' ? 'text-emerald-500' : 'text-slate-200 group-hover:text-emerald-300 transition-colors' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    @if($sortColumn == 'sumber_atau_tujuan' && $sortDirection == 'asc')
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path>
+                                <svg class="w-3 h-3 {{ $sortColumn == 'sumber_atau_tujuan' ? 'text-emerald-500' : 'text-slate-200 group-hover:text-emerald-300 transition-colors' }}"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    @if ($sortColumn == 'sumber_atau_tujuan' && $sortDirection == 'asc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M5 15l7-7 7 7"></path>
                                     @elseif($sortColumn == 'sumber_atau_tujuan' && $sortDirection == 'desc')
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M19 9l-7 7-7-7"></path>
                                     @else
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
                                     @endif
                                 </svg>
                             </div>
                         </th>
 
-                        <th class="px-6 py-6 text-center cursor-pointer group hover:text-emerald-500 transition-colors" wire:click="sortBy('kategori')">
+                        <th class="px-6 py-6 text-center cursor-pointer group hover:text-emerald-500 transition-colors"
+                            wire:click="sortBy('kategori')">
                             <div class="flex items-center justify-center gap-2">
                                 Jenis
-                                <svg class="w-3 h-3 {{ $sortColumn == 'kategori' ? 'text-emerald-500' : 'text-slate-200 group-hover:text-emerald-300 transition-colors' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    @if($sortColumn == 'kategori' && $sortDirection == 'asc')
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path>
+                                <svg class="w-3 h-3 {{ $sortColumn == 'kategori' ? 'text-emerald-500' : 'text-slate-200 group-hover:text-emerald-300 transition-colors' }}"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    @if ($sortColumn == 'kategori' && $sortDirection == 'asc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M5 15l7-7 7 7"></path>
                                     @elseif($sortColumn == 'kategori' && $sortDirection == 'desc')
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M19 9l-7 7-7-7"></path>
                                     @else
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
                                     @endif
                                 </svg>
                             </div>
                         </th>
 
-                        <th class="px-8 py-6 text-right cursor-pointer group hover:text-emerald-500 transition-colors" wire:click="sortBy('nominal')">
+                        <th class="px-8 py-6 text-right cursor-pointer group hover:text-emerald-500 transition-colors"
+                            wire:click="sortBy('nominal')">
                             <div class="flex items-center justify-end gap-2">
                                 Nominal
-                                <svg class="w-3 h-3 {{ $sortColumn == 'nominal' ? 'text-emerald-500' : 'text-slate-200 group-hover:text-emerald-300 transition-colors' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    @if($sortColumn == 'nominal' && $sortDirection == 'asc')
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path>
+                                <svg class="w-3 h-3 {{ $sortColumn == 'nominal' ? 'text-emerald-500' : 'text-slate-200 group-hover:text-emerald-300 transition-colors' }}"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    @if ($sortColumn == 'nominal' && $sortDirection == 'asc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M5 15l7-7 7 7"></path>
                                     @elseif($sortColumn == 'nominal' && $sortDirection == 'desc')
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M19 9l-7 7-7-7"></path>
                                     @else
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
                                     @endif
                                 </svg>
                             </div>

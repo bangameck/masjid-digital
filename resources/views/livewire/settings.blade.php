@@ -1,6 +1,6 @@
 <div class="space-y-8 pb-20 work-sans-all">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100..900&display=swap');
+        /* @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100..900&display=swap'); */
 
         .work-sans-all,
         .work-sans-all * {
@@ -338,8 +338,8 @@
                     Konfigurasi API & Integrasi
                 </h3>
 
-                <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
-                <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+                <link href="{{ asset('assets/css/tom-select/tom-select.css') }}" rel="stylesheet">
+                <script src="{{ asset('assets/js/tom-select/tom-select.complete.min.js') }}"></script>  
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div

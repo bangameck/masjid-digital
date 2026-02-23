@@ -8,8 +8,7 @@
 
         <title>{{ $title ?? 'Dashboard' }} - {{ config('app.name', 'Masjid Digital') }}</title>
 
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=work-sans:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+       <link rel="stylesheet" href="{{ asset('assets/css/fonts.css') }}">
 
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
             integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />

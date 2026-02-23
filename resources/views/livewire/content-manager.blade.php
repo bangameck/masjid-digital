@@ -1,6 +1,5 @@
 <div class="space-y-8 md:space-y-8 pb-20 work-sans-all">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
         .font-arab { font-family: 'Amiri', serif !important; direction: rtl; }
 
         .floating-input:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {

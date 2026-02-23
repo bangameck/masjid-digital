@@ -1,5 +1,5 @@
 <div class="space-y-6 md:space-y-8 pb-10">
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="{{ asset('assets/js/apexcharts/3.41.0/apexcharts.min.js') }}"></script>
 
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white p-6 md:p-8 rounded-4xl border border-slate-100 shadow-sm relative overflow-hidden">
         <div class="absolute -right-10 -top-10 w-40 h-40 bg-{{ $theme_color }}-50 rounded-full blur-3xl opacity-50"></div>

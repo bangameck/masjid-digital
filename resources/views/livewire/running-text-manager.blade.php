@@ -1,6 +1,6 @@
     <div class="space-y-8 md:space-y-8 pb-20 work-sans-all">
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100..900&display=swap');
+            /* @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100..900&display=swap'); */
             .work-sans-all, .work-sans-all * { font-family: 'Work Sans', sans-serif !important; }
 
             .marquee-preview {

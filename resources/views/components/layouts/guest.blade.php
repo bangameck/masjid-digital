@@ -42,15 +42,16 @@
         <meta name="twitter:image" content="{{ $seoImage }}">
 
         <meta name="theme-color" content="#10b981">
+        <link rel="stylesheet" href="{{ asset('assets/css/fonts.css') }}">
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100..900&display=swap');
+            /* @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100..900&display=swap');
 
             .work-sans-all {
                 font-family: 'Work Sans', sans-serif !important;
-            }
+            } */
 
             /* Style Floating Label Global untuk Guest */
             .floating-input:focus~label,
