@@ -9,9 +9,11 @@
  */
 
 namespace App\Providers;
-use Illuminate\Support\Facades\URL;
 
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use App\Models\AppSetting;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,9 +29,16 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-{
-    if (app()->environment('production')) {
-        URL::forceScheme('https');
+    {
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
+        View::composer('*', function ($view) {
+            $view->with('settings', cache()->remember(
+                'app_settings',
+                3600,
+                fn() => AppSetting::first() ?? new AppSetting()
+            ));
+        });
     }
-}
 }

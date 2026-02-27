@@ -46,7 +46,7 @@ class RunningTextManager extends Component
 
         // Ambil Global Speed dari AppSetting
         // Default value (misal 5) jika tabel kosong
-        $setting = AppSetting::first();
+        $setting = AppSetting::getSettings();
         $globalSpeed = $setting->running_text_speed ?? 5;
 
         return view('livewire.running-text-manager', [

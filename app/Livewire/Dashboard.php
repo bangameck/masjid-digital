@@ -29,7 +29,7 @@ class Dashboard extends Component
 
     public function mount()
     {
-        $settings = AppSetting::first();
+        $settings = AppSetting::getSettings();
         if ($settings) {
             $this->theme_color = $settings->theme_color ?? 'emerald';
         }
@@ -37,7 +37,7 @@ class Dashboard extends Component
 
     public function changeTheme($color)
     {
-        $settings = AppSetting::first() ?? AppSetting::create(['nama_masjid' => 'Masjid Digital']);
+        $settings = AppSetting::getSettings();
         $settings->update(['theme_color' => $color]);
         $this->theme_color = $color;
 

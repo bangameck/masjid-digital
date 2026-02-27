@@ -54,7 +54,7 @@ class Settings extends Component
 
     public function mount()
     {
-        $settings = AppSetting::first();
+        $settings = AppSetting::getSettings();
         $this->availableThemes = ThemeColor::where('is_active', true)->get();
 
         if ($settings) {

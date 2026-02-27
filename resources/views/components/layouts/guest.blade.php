@@ -1,5 +1,5 @@
 @php
-    $setting = \App\Models\AppSetting::first();
+    $setting = $settings;
     $isLogin = request()->routeIs('login');
 
     $masjidName = $setting->nama_masjid ?? 'Masjid Digital';

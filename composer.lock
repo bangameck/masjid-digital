@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "031fd00fb4acc79c78e3a676a6406e0f",
+    "content-hash": "ebf27a22e2748e73291c0bfb85ada74c",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1566,6 +1566,65 @@
             "time": "2026-02-06T12:17:10+00:00"
         },
         {
+            "name": "laravel/sentinel",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sentinel.git",
+                "reference": "7a98db53e0d9d6f61387f3141c07477f97425603"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/sentinel/zipball/7a98db53e0d9d6f61387f3141c07477f97425603",
+                "reference": "7a98db53e0d9d6f61387f3141c07477f97425603",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/container": "^8.37|^9.0|^10.0|^11.0|^12.0|^13.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.27",
+                "orchestra/testbench": "^6.47.1|^7.56|^8.37|^9.16|^10.9|^11.0",
+                "phpstan/phpstan": "^2.1.33"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Sentinel\\SentinelServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-main": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Sentinel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                },
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "mior@laravel.com"
+                }
+            ],
+            "support": {
+                "source": "https://github.com/laravel/sentinel/tree/v1.0.1"
+            },
+            "time": "2026-02-12T13:32:54+00:00"
+        },
+        {
             "name": "laravel/serializable-closure",
             "version": "v2.0.9",
             "source": {
@@ -1625,6 +1684,75 @@
                 "source": "https://github.com/laravel/serializable-closure"
             },
             "time": "2026-02-03T06:55:34+00:00"
+        },
+        {
+            "name": "laravel/telescope",
+            "version": "5.18.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/telescope.git",
+                "reference": "8bbc1d839317cef7106cabf028e407416e5a1dad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/8bbc1d839317cef7106cabf028e407416e5a1dad",
+                "reference": "8bbc1d839317cef7106cabf028e407416e5a1dad",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "^8.37|^9.0|^10.0|^11.0|^12.0|^13.0",
+                "laravel/sentinel": "^1.0",
+                "php": "^8.0",
+                "symfony/console": "^5.3|^6.0|^7.0",
+                "symfony/var-dumper": "^5.0|^6.0|^7.0"
+            },
+            "require-dev": {
+                "ext-gd": "*",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "laravel/octane": "^1.4|^2.0",
+                "orchestra/testbench": "^6.47.1|^7.55|^8.36|^9.15|^10.8|^11.0",
+                "phpstan/phpstan": "^1.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Telescope\\TelescopeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Telescope\\": "src/",
+                    "Laravel\\Telescope\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                },
+                {
+                    "name": "Mohamed Said",
+                    "email": "mohamed@laravel.com"
+                }
+            ],
+            "description": "An elegant debug assistant for the Laravel framework.",
+            "keywords": [
+                "debugging",
+                "laravel",
+                "monitoring"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/telescope/issues",
+                "source": "https://github.com/laravel/telescope/tree/5.18.0"
+            },
+            "time": "2026-02-20T19:55:06+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -6586,6 +6714,165 @@
     ],
     "packages-dev": [
         {
+            "name": "barryvdh/laravel-debugbar",
+            "version": "v4.0.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fruitcake/laravel-debugbar.git",
+                "reference": "96afd5efc93c2cb3140df356893381296259695b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fruitcake/laravel-debugbar/zipball/96afd5efc93c2cb3140df356893381296259695b",
+                "reference": "96afd5efc93c2cb3140df356893381296259695b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/routing": "^11|^12|^13.0",
+                "illuminate/session": "^11|^12|^13.0",
+                "illuminate/support": "^11|^12|^13.0",
+                "php": "^8.2",
+                "php-debugbar/php-debugbar": "^3.3.1",
+                "php-debugbar/symfony-bridge": "^1.1"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3",
+                "laravel/octane": "^2",
+                "laravel/pennant": "^1",
+                "laravel/pint": "^1",
+                "laravel/telescope": "^5.16",
+                "livewire/livewire": "^3.7|^4",
+                "mockery/mockery": "^1.3.3",
+                "orchestra/testbench-dusk": "^9|^10",
+                "php-debugbar/twig-bridge": "^2.0",
+                "phpstan/phpstan-phpunit": "^2",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^11",
+                "shipmonk/phpstan-rules": "^4.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Debugbar": "Fruitcake\\LaravelDebugbar\\Facades\\Debugbar"
+                    },
+                    "providers": [
+                        "Fruitcake\\LaravelDebugbar\\ServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "4.0-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Fruitcake\\LaravelDebugbar\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fruitcake",
+                    "homepage": "https://fruitcake.nl"
+                },
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "PHP Debugbar integration for Laravel",
+            "keywords": [
+                "barryvdh",
+                "debug",
+                "debugbar",
+                "dev",
+                "laravel",
+                "profiler",
+                "webprofiler"
+            ],
+            "support": {
+                "issues": "https://github.com/fruitcake/laravel-debugbar/issues",
+                "source": "https://github.com/fruitcake/laravel-debugbar/tree/v4.0.10"
+            },
+            "funding": [
+                {
+                    "url": "https://fruitcake.nl",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/barryvdh",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-02-26T11:45:48+00:00"
+        },
+        {
+            "name": "beyondcode/laravel-query-detector",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/beyondcode/laravel-query-detector.git",
+                "reference": "0f2b1665600689387a52900c8ef79c542d7f16f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/beyondcode/laravel-query-detector/zipball/0f2b1665600689387a52900c8ef79c542d7f16f6",
+                "reference": "0f2b1665600689387a52900c8ef79c542d7f16f6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0|^10.0 || ^11.0 || ^12.0",
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "laravel/legacy-factories": "^1.0",
+                "orchestra/testbench": "^3.0 || ^4.0 || ^5.0 || ^6.0|^8.0 || ^9.0 || ^10.0",
+                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0 || ^10.5 || ^11.5.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BeyondCode\\QueryDetector\\QueryDetectorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BeyondCode\\QueryDetector\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcel Pociot",
+                    "email": "marcel@beyondco.de",
+                    "homepage": "https://beyondcode.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel N+1 Query Detector",
+            "homepage": "https://github.com/beyondcode/laravel-query-detector",
+            "keywords": [
+                "beyondcode",
+                "laravel-query-detector"
+            ],
+            "support": {
+                "issues": "https://github.com/beyondcode/laravel-query-detector/issues",
+                "source": "https://github.com/beyondcode/laravel-query-detector/tree/2.2.0"
+            },
+            "time": "2026-01-26T12:45:40+00:00"
+        },
+        {
             "name": "fakerphp/faker",
             "version": "v1.24.1",
             "source": {
@@ -7339,6 +7626,174 @@
                 "source": "https://github.com/phar-io/version/tree/3.2.1"
             },
             "time": "2022-02-21T01:04:05+00:00"
+        },
+        {
+            "name": "php-debugbar/php-debugbar",
+            "version": "v3.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-debugbar/php-debugbar.git",
+                "reference": "ee9c718797a4c1fdf6c4d980cb3edcc1eeeddcc7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-debugbar/php-debugbar/zipball/ee9c718797a4c1fdf6c4d980cb3edcc1eeeddcc7",
+                "reference": "ee9c718797a4c1fdf6c4d980cb3edcc1eeeddcc7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2",
+                "psr/log": "^1|^2|^3",
+                "symfony/var-dumper": "^5.4|^6|^7|^8"
+            },
+            "replace": {
+                "maximebf/debugbar": "self.version"
+            },
+            "require-dev": {
+                "dbrekelmans/bdi": "^1.4",
+                "friendsofphp/php-cs-fixer": "^3.92",
+                "monolog/monolog": "^3.9",
+                "php-debugbar/doctrine-bridge": "^3@dev",
+                "php-debugbar/monolog-bridge": "^1@dev",
+                "php-debugbar/symfony-bridge": "^1@dev",
+                "php-debugbar/twig-bridge": "^2@dev",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^10",
+                "predis/predis": "^3.3",
+                "shipmonk/phpstan-rules": "^4.3",
+                "symfony/browser-kit": "^6.4|7.0",
+                "symfony/dom-crawler": "^6.4|^7",
+                "symfony/event-dispatcher": "^5.4|^6.4|^7.3|^8.0",
+                "symfony/http-foundation": "^5.4|^6.4|^7.3|^8.0",
+                "symfony/mailer": "^5.4|^6.4|^7.3|^8.0",
+                "symfony/panther": "^1|^2.1",
+                "twig/twig": "^3.11.2"
+            },
+            "suggest": {
+                "php-debugbar/doctrine-bridge": "To integrate Doctrine with php-debugbar.",
+                "php-debugbar/monolog-bridge": "To integrate Monolog with php-debugbar.",
+                "php-debugbar/symfony-bridge": "To integrate Symfony with php-debugbar.",
+                "php-debugbar/twig-bridge": "To integrate Twig with php-debugbar."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DebugBar\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxime Bouroumeau-Fuseau",
+                    "email": "maxime.bouroumeau@gmail.com",
+                    "homepage": "http://maximebf.com"
+                },
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Debug bar in the browser for php application",
+            "homepage": "https://github.com/php-debugbar/php-debugbar",
+            "keywords": [
+                "debug",
+                "debug bar",
+                "debugbar",
+                "dev",
+                "profiler",
+                "toolbar"
+            ],
+            "support": {
+                "issues": "https://github.com/php-debugbar/php-debugbar/issues",
+                "source": "https://github.com/php-debugbar/php-debugbar/tree/v3.4.1"
+            },
+            "funding": [
+                {
+                    "url": "https://fruitcake.nl",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/barryvdh",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-02-26T11:40:30+00:00"
+        },
+        {
+            "name": "php-debugbar/symfony-bridge",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-debugbar/symfony-bridge.git",
+                "reference": "e37d2debe5d316408b00d0ab2688d9c2cf59b5ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-debugbar/symfony-bridge/zipball/e37d2debe5d316408b00d0ab2688d9c2cf59b5ad",
+                "reference": "e37d2debe5d316408b00d0ab2688d9c2cf59b5ad",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2",
+                "php-debugbar/php-debugbar": "^3.1",
+                "symfony/http-foundation": "^5.4|^6.4|^7.3|^8.0"
+            },
+            "require-dev": {
+                "dbrekelmans/bdi": "^1.4",
+                "phpunit/phpunit": "^10",
+                "symfony/browser-kit": "^6|^7",
+                "symfony/dom-crawler": "^6|^7",
+                "symfony/mailer": "^5.4|^6.4|^7.3|^8.0",
+                "symfony/panther": "^1|^2.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DebugBar\\Bridge\\Symfony\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxime Bouroumeau-Fuseau",
+                    "email": "maxime.bouroumeau@gmail.com",
+                    "homepage": "http://maximebf.com"
+                },
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Symfony bridge for PHP Debugbar",
+            "homepage": "https://github.com/php-debugbar/php-debugbar",
+            "keywords": [
+                "debugbar",
+                "dev",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/php-debugbar/symfony-bridge/issues",
+                "source": "https://github.com/php-debugbar/symfony-bridge/tree/v1.1.0"
+            },
+            "time": "2026-01-15T14:47:34+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

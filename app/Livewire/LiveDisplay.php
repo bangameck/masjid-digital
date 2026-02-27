@@ -34,7 +34,7 @@ class LiveDisplay extends Component
     public function render()
     {
         $today = date('Y-m-d');
-        $settings = AppSetting::with('theme')->first();
+        $settings = AppSetting::getSettings(true);
         $tipeTempat = $settings->tipe_tempat ?? 'Masjid';
 
         // 1. DATA JADWAL & KOREKSI WAKTU DINAMIS

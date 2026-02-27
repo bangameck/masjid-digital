@@ -113,7 +113,7 @@
                                 {{ $title ?? 'Dashboard' }}
                             </p>
                             <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mt-1.5">
-                                {{ \App\Models\AppSetting::first()->nama_masjid ?? 'Masjid Digital' }}
+                                {{ $settings->nama_masjid ?? 'Masjid Digital' }}
                             </p>
                         </div>
                     </div>

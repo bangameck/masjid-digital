@@ -1,7 +1,7 @@
 <div class="space-y-8 pb-10 work-sans-all relative" style="font-family: 'Work Sans', sans-serif !important;">
 
     @php
-        $setting = \App\Models\AppSetting::first();
+        $setting = $settings;
     @endphp
 
     <style>

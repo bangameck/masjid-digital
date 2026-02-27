@@ -2,7 +2,7 @@
     <div class="flex flex-col items-center justify-center h-20 bg-slate-950 px-6 border-b border-slate-800 shrink-0">
         <h1 class="text-xl font-black tracking-tighter text-emerald-400 leading-none">MASJID<span class="text-white">DIGITAL</span></h1>
         <p class="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1.5 line-clamp-1 text-center">
-            {{ \App\Models\AppSetting::first()->nama_masjid ?? 'Sistem Manajemen' }}
+            {{ $settings->nama_masjid ?? 'Sistem Manajemen' }}
         </p>
     </div>
 

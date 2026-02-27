@@ -34,7 +34,7 @@ class Login extends Component
     public function render()
     {
         // Ambil data setting pertama (umumnya cuma ada 1 row)
-        $setting = AppSetting::first();
+        $setting = AppSetting::getSettings(); // Menggunakan method getSettings() yang sudah di-cache
 
         return view('livewire.auth.login', [
             'setting' => $setting

@@ -114,7 +114,7 @@ class JadwalSholat extends Component
         $this->apiStatusHijri  = 'Menunggu...';
         $this->statusText      = "Memeriksa ketersediaan API...";
 
-        $setting = AppSetting::first();
+        $setting = AppSetting::getSettings();
         $kotaId  = $setting->kota_id ?? 'c7e1249ffc03eb9ded908c236bd1996d'; // Default Pekanbaru
 
         // --- VALIDASI URL KOSONG / NULL ---
@@ -184,7 +184,7 @@ class JadwalSholat extends Component
     {
         if (! $this->canEdit) return;
 
-        $setting = AppSetting::first();
+        $setting = AppSetting::getSettings();
         $kotaId  = $setting->kota_id ?? 'c7e1249ffc03eb9ded908c236bd1996d'; // Default Pekanbaru
 
         $dateObj = Carbon::createFromDate($this->tahun_generate, $this->bulan_generate, $this->currentDay);
@@ -265,7 +265,7 @@ class JadwalSholat extends Component
 
         return view('livewire.jadwal-sholat', [
             'data_jadwal' => $jadwal,
-            'setting'     => AppSetting::first(),
+            'setting'     => AppSetting::getSettings(),
         ]);
     }
 }
